@@ -575,7 +575,7 @@ const TWStateManager = function (WrappedComponent) {
         vm: PropTypes.instanceOf(VM)
     };
     StateManagerComponent.defaultProps = {
-        routingStyle: process.env.ROUTING_STYLE
+        routingStyle: 'none'
     };
     const mapStateToProps = state => ({
         customStageSize: state.scratchGui.customStageSize,
