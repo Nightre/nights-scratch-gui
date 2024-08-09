@@ -20,7 +20,6 @@ import { compose } from 'redux';
 import AppStateHOC from '../lib/app-state-hoc.jsx';
 import ErrorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 import TWStateManagerHOC from '../lib/tw-state-manager-hoc.jsx';
-import classNames from 'classnames';
 import TWPackagerIntegrationHOC from '../lib/tw-packager-integration-hoc.jsx';
 import SettingsStore from '../addons/settings-store-singleton';
 import '../lib/tw-fix-history-api';
@@ -28,7 +27,6 @@ import GUI from '../containers/gui.jsx';
 import AddonChannels from '../addons/channels';
 import { loadServiceWorker } from './load-service-worker';
 import runAddons from '../addons/entry';
-import styles from './interface.css';
 
 // const handleClickAddonSettings = addonId => {
 //     // addonId might be a string of the addon to focus on, undefined, or an event (treat like undefined)

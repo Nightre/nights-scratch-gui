@@ -1,5 +1,12 @@
 scratch-gui modified for use in [TurboWarp](https://turbowarp.org/)
 
+## 打包的时候执行
+```s
+$env:ROUTING_STYLE="wildcard"
+$env:STATIC_PATH="/scratch-gui/dist/static"
+$env:ROOT="/scratch-gui/dist/"
+$env:BUILD_MODE="dist"
+```
 ## Setup
 
 See https://docs.turbowarp.org/development/getting-started to setup the complete TurboWarp environment.

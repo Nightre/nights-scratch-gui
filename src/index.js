@@ -6,6 +6,10 @@ import {ScratchPaintReducer} from 'scratch-paint';
 import {setFullScreen, setPlayer} from './reducers/mode';
 import {remixProject} from './reducers/project-state';
 import {setAppElement} from 'react-modal';
+import WrappedGUI from './playground/render-interface.jsx';
+
+import downloadBlob from './lib/download-blob.js';
+import Settings from './addons/settings/settings.jsx';
 
 const guiReducers = {
     locales: LocalesReducer,
@@ -15,7 +19,10 @@ const guiReducers = {
 
 export {
     GUI as default,
+    downloadBlob,
+    Settings,
     AppStateHOC,
+    WrappedGUI,
     setAppElement,
     guiReducers,
     guiInitialState,

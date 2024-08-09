@@ -1083,7 +1083,7 @@ class AddonSettingsComponent extends React.Component {
             manifest
         }));
         return (
-            <div className={styles.container}>
+            <div className={[styles.turbowarp, styles.container]}>
                 <div className={styles.header}>
                     <div className={styles.section}>
                         <div className={styles.searchContainer}>

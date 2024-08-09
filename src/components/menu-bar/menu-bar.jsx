@@ -84,9 +84,6 @@ import collectMetadata from '../../lib/collect-metadata';
 
 import styles from './menu-bar.css';
 
-import helpIcon from '../../lib/assets/icon--tutorials.svg';
-import mystuffIcon from './icon--mystuff.png';
-import profileIcon from './icon--profile.png';
 import remixIcon from './icon--remix.svg';
 import dropdownCaret from './dropdown-caret.svg';
 import aboutIcon from './icon--about.svg';
@@ -105,7 +102,6 @@ import sharedMessages from '../../lib/shared-messages';
 
 import SeeInsideButton from './tw-see-inside.jsx';
 import { notScratchDesktop } from '../../lib/isScratchDesktop.js';
-import { APP_NAME } from '../../lib/brand.js';
 import UploadButton from './upload-button.jsx';
 
 const ariaMessages = defineMessages({
@@ -1008,9 +1004,9 @@ class MenuBar extends React.Component {
                             />
                         ) : []))}
                     </div>
-                    <div className={classNames(styles.menuBarItem)}><UploadButton
+                    {this.props.canSave && <div className={classNames(styles.menuBarItem)}><UploadButton
                         className={styles.menuBarButton}
-                    /></div>
+                    /></div>}
                 </div>
 
 
