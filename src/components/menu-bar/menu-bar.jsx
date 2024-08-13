@@ -102,7 +102,6 @@ import sharedMessages from '../../lib/shared-messages';
 
 import SeeInsideButton from './tw-see-inside.jsx';
 import { notScratchDesktop } from '../../lib/isScratchDesktop.js';
-import UploadButton from './upload-button.jsx';
 
 const ariaMessages = defineMessages({
     tutorials: {

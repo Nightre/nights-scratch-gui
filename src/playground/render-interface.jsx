@@ -15,7 +15,7 @@
  */
 
 import React from 'react';
-
+import TWProjectMetaFetcherHOC from '../lib/tw-project-meta-fetcher-hoc.jsx';
 import { compose } from 'redux';
 import AppStateHOC from '../lib/app-state-hoc.jsx';
 import ErrorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
@@ -83,6 +83,7 @@ class Interface extends React.Component {
 const WrappedInterface = compose(
     AppStateHOC,
     ErrorBoundaryHOC('TW Interface'),
+    TWProjectMetaFetcherHOC,
     ProjectFetcherHOC,
     TWStateManagerHOC,
     TWPackagerIntegrationHOC
