@@ -27,7 +27,7 @@ import GUI from '../containers/gui.jsx';
 import AddonChannels from '../addons/channels';
 import { loadServiceWorker } from './load-service-worker';
 import runAddons from '../addons/entry';
-
+import ProjectFetcherHOC from "../lib/project-fetcher-hoc.jsx"
 // const handleClickAddonSettings = addonId => {
 //     // addonId might be a string of the addon to focus on, undefined, or an event (treat like undefined)
 //     const path = process.env.ROUTING_STYLE === 'wildcard' ? 'addons' : 'addons.html';
@@ -83,6 +83,7 @@ class Interface extends React.Component {
 const WrappedInterface = compose(
     AppStateHOC,
     ErrorBoundaryHOC('TW Interface'),
+    ProjectFetcherHOC,
     TWStateManagerHOC,
     TWPackagerIntegrationHOC
 )(Interface);
