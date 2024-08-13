@@ -21,9 +21,4 @@ import React from 'react';
 import Interface from './render-interface.jsx';
 import render from './app-target';
 
-render(
-    <div style={{"height":"100vh"}}>
-        <Interface />
-    </div>
-
-);
+render(<Interface />);

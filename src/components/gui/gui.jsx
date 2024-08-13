@@ -2,10 +2,10 @@ import classNames from 'classnames';
 import omit from 'lodash.omit';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { defineMessages, FormattedMessage, injectIntl, intlShape } from 'react-intl';
-import { connect } from 'react-redux';
+import {defineMessages, FormattedMessage, injectIntl, intlShape} from 'react-intl';
+import {connect} from 'react-redux';
 import MediaQuery from 'react-responsive';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import tabStyles from 'react-tabs/style/react-tabs.css';
 import VM from 'scratch-vm';
 
@@ -38,11 +38,11 @@ import TWFontsModal from '../../containers/tw-fonts-modal.jsx';
 import TWUnknownPlatformModal from '../../containers/tw-unknown-platform-modal.jsx';
 import TWInvalidProjectModal from '../../containers/tw-invalid-project-modal.jsx';
 
-import { STAGE_SIZE_MODES, FIXED_WIDTH, UNCONSTRAINED_NON_STAGE_WIDTH } from '../../lib/layout-constants';
-import { resolveStageSize } from '../../lib/screen-utils';
-import { Theme } from '../../lib/themes';
+import {STAGE_SIZE_MODES, FIXED_WIDTH, UNCONSTRAINED_NON_STAGE_WIDTH} from '../../lib/layout-constants';
+import {resolveStageSize} from '../../lib/screen-utils';
+import {Theme} from '../../lib/themes';
 
-import { isRendererSupported, isBrowserSupported } from '../../lib/tw-environment-support-prober';
+import {isRendererSupported, isBrowserSupported} from '../../lib/tw-environment-support-prober';
 
 import styles from './gui.css';
 import addExtensionIcon from './icon--extensions.svg';
@@ -74,7 +74,6 @@ const fullscreenBackgroundColor = getFullscreenBackgroundColor();
 const GUIComponent = props => {
     const {
         accountNavOpen,
-        onClickSeeInside,
         activeTabIndex,
         alertsVisible,
         authorId,
@@ -285,7 +284,6 @@ const GUIComponent = props => {
                     />
                 ) : null}
                 <MenuBar
-                    onClickSeeInside={onClickSeeInside}
                     accountNavOpen={accountNavOpen}
                     authorId={authorId}
                     authorThumbnailUrl={authorThumbnailUrl}
@@ -517,7 +515,6 @@ GUIComponent.propTypes = {
     onShare: PropTypes.func,
     onShowPrivacyPolicy: PropTypes.func,
     onStartSelectingFileUpload: PropTypes.func,
-    onClickSeeInside: PropTypes.func,
     onTabSelect: PropTypes.func,
     onTelemetryModalCancel: PropTypes.func,
     onTelemetryModalOptIn: PropTypes.func,
@@ -543,8 +540,6 @@ GUIComponent.propTypes = {
     vm: PropTypes.instanceOf(VM).isRequired
 };
 GUIComponent.defaultProps = {
-    onClickSeeInside: () => { },
-    onClickAddonSettings: () => { },
     backpackHost: null,
     backpackVisible: false,
     basePath: './',

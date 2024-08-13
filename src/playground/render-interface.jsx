@@ -75,6 +75,7 @@ class Interface extends React.Component {
                 backpackHost="_local_"
 
                 {...this.props}
+                onClickAddonSettings={() => { }}
             />
         );
     }

@@ -37,6 +37,7 @@ import styles from './settings.css';
 import {detectTheme} from '../../lib/themes/themePersistance.js';
 import {applyGuiColors} from '../../lib/themes/guiHelpers.js';
 import {APP_NAME} from '../../lib/brand.js';
+import '../../lib/normalize.css';
 
 /* eslint-disable no-alert */
 /* eslint-disable no-console */
@@ -1082,7 +1083,7 @@ class AddonSettingsComponent extends React.Component {
             manifest
         }));
         return (
-            <div className={[styles.turbowarp, styles.container]}>
+            <div className={styles.container}>
                 <div className={styles.header}>
                     <div className={styles.section}>
                         <div className={styles.searchContainer}>
