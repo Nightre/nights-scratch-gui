@@ -66,6 +66,7 @@ class Interface extends React.Component {
             <GUI
                 cloudHost={this.props.cloudHost ?? "wss://clouddata.turbowarp.org"}
                 canUseCloud
+                canModifyCloudData
                 hasCloudPermission
 
                 basePath={process.env.ROOT}
