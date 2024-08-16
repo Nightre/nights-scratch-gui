@@ -7,18 +7,24 @@
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: $ui-white;
     color: $text-primary;
-    border-top-left-radius: $space;
-    border-top-right-radius: $space;
-    border-bottom: 1px solid $ui-black-transparent;
-}
 
+    border-left: 1px solid $ui-black-transparent;
+    min-width: 20rem;
+    overflow: auto;
+}
+.ml {
+    margin-left: 0.5rem;
+}
 .row {
     display: flex;
-    justify-content: space-between;
-}
-
-.row-primary {
+    justify-content: flex-start;
     margin-bottom: 0.5rem;
+}
+.title {
+    margin: 0;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+
 }
 
 .label { opacity: 0.8; }

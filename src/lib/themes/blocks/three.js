@@ -5,6 +5,18 @@ const blockColors = {
         tertiary: '#3373CC',
         quaternary: '#3373CC'
     },
+    structures: {
+        primary: '#4C97FF',
+        secondary: '#4280D7',
+        tertiary: '#3373CC',
+        quaternary: '#3373CC'
+    },
+    lambda: {
+        primary: '#4C97FF',
+        secondary: '#4280D7',
+        tertiary: '#3373CC',
+        quaternary: '#3373CC'
+    },
     looks: {
         primary: '#9966FF',
         secondary: '#855CD6',

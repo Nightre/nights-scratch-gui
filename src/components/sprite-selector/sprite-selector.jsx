@@ -81,7 +81,7 @@ const SpriteSelectorComponent = function (props) {
             {...componentProps}
         >
 
-            <SpriteInfo
+            {/* <SpriteInfo
                 direction={selectedSprite.direction}
                 disabled={spriteInfoDisabled}
                 name={selectedSprite.name}
@@ -98,7 +98,7 @@ const SpriteSelectorComponent = function (props) {
                 onChangeVisibility={onChangeSpriteVisibility}
                 onChangeX={onChangeSpriteX}
                 onChangeY={onChangeSpriteY}
-            />
+            /> */}
 
             <SpriteList
                 editingTarget={editingTarget}

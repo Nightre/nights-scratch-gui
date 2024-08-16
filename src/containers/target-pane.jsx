@@ -303,3 +303,4 @@ export default injectIntl(connect(
     mapStateToProps,
     mapDispatchToProps
 )(TargetPane));
+

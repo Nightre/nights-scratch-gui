@@ -1,0 +1,12 @@
+.side-tab {
+    min-width: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.side-tab button {
+    flex: 1;
+}

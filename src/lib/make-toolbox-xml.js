@@ -1,5 +1,5 @@
 import LazyScratchBlocks from './tw-lazy-scratch-blocks';
-import {defaultBlockColors} from './themes';
+import { defaultBlockColors } from './themes';
 
 const categorySeparator = '<sep gap="36"/>';
 
@@ -151,11 +151,11 @@ const motion = function (isInitialSetup, isStage, targetId, colors) {
 const xmlEscape = function (unsafe) {
     return unsafe.replace(/[<>&'"]/g, c => {
         switch (c) {
-        case '<': return '&lt;';
-        case '>': return '&gt;';
-        case '&': return '&amp;';
-        case '\'': return '&apos;';
-        case '"': return '&quot;';
+            case '<': return '&lt;';
+            case '>': return '&gt;';
+            case '&': return '&amp;';
+            case '\'': return '&apos;';
+            case '"': return '&quot;';
         }
     });
 };
@@ -752,6 +752,47 @@ const extraTurboWarpBlocks = `
 `;
 /* eslint-enable no-unused-vars */
 
+
+const structures = function (isInitialSetup, isStage, targetId, colors) {
+
+    // Note: the category's secondaryColour matches up with the blocks' tertiary color, both used for border color.
+    return `
+    <category
+        name="数据结构"
+        id="structures"
+        colour="${colors.primary}"
+        secondaryColour="${colors.tertiary}">
+        <block type="structures_create_json">
+        </block>
+        <block type="structures_create_list">
+        </block>
+    </category>
+    `;
+};
+const lambda = function (isInitialSetup, isStage, targetId, colors) {
+
+    // Note: the category's secondaryColour matches up with the blocks' tertiary color, both used for border color.
+    return `
+    <category
+        name="匿名函数"
+        id="lambda"
+        colour="${colors.primary}"
+        secondaryColour="${colors.tertiary}">
+        <block type="lambda_create_json">
+            <value name="NUM1">
+                <shadow type="math_number">
+                    <field name="NUM"/>
+                </shadow>
+            </value>
+            <value name="NUM2">
+                <shadow type="math_number">
+                    <field name="NUM"/>
+                </shadow>
+            </value>
+        </block>
+    </category>
+    `;
+};
 const xmlOpen = '<xml style="display: none">';
 const xmlClose = '</xml>';
 
@@ -800,7 +841,8 @@ const makeToolboxXML = function (isInitialSetup, isStage = true, targetId, categ
     const operatorsXML = moveCategory('operators') || operators(isInitialSetup, isStage, targetId, colors.operators);
     const variablesXML = moveCategory('data') || variables(isInitialSetup, isStage, targetId, colors.data);
     const myBlocksXML = moveCategory('procedures') || myBlocks(isInitialSetup, isStage, targetId, colors.more);
-
+    const structuresBlocksXML = moveCategory('structures') || structures(isInitialSetup, isStage, targetId, colors.structures);
+    const lambdaBlocksXML = moveCategory('lambda') || lambda(isInitialSetup, isStage, targetId, colors.lambda);
     // Always display TurboWarp blocks as the first extension, if it exists,
     // and also add an "is compiled?" block to the top.
     let turbowarpXML = moveCategory('tw');
@@ -817,8 +859,12 @@ const makeToolboxXML = function (isInitialSetup, isStage = true, targetId, categ
         controlXML, gap,
         sensingXML, gap,
         operatorsXML, gap,
+
+        lambdaBlocksXML, gap,
+        structuresBlocksXML, gap,
+
         variablesXML, gap,
-        myBlocksXML
+        myBlocksXML,
     ];
 
     if (turbowarpXML) {

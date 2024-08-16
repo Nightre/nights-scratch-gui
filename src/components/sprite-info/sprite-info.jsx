@@ -8,10 +8,10 @@ import Input from '../forms/input.jsx';
 import BufferedInputHOC from '../forms/buffered-input-hoc.jsx';
 import DirectionPicker from '../../containers/direction-picker.jsx';
 
-import {injectIntl, intlShape, defineMessages, FormattedMessage} from 'react-intl';
+import { injectIntl, intlShape, defineMessages, FormattedMessage } from 'react-intl';
 
-import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants.js';
-import {isWideLocale} from '../../lib/locale-utils.js';
+import { STAGE_DISPLAY_SIZES } from '../../lib/layout-constants.js';
+import { isWideLocale } from '../../lib/locale-utils.js';
 
 import styles from './sprite-info.css';
 
@@ -20,7 +20,10 @@ import yIcon from './icon--y.svg';
 import showIcon from '!../../lib/tw-recolor/build!./icon--show.svg';
 import hideIcon from '!../../lib/tw-recolor/build!./icon--hide.svg';
 import ToggleButtons from '../toggle-buttons/toggle-buttons.jsx';
-
+import AddComponentBtn from '../add-component-btn/add-component-btn.jsx';
+import ComponentAttribute from "../component-attribute/component-attribute.jsx"
+import CustomAttributes from '../custom-attributes/custom-attributes.jsx';
+import PrototypeChain from './../prototype-chain/prototype-chain.jsx';
 const BufferedInput = BufferedInputHOC(Input);
 
 const messages = defineMessages({
@@ -42,7 +45,7 @@ const messages = defineMessages({
 });
 
 class SpriteInfo extends React.Component {
-    shouldComponentUpdate (nextProps) {
+    shouldComponentUpdate(nextProps) {
         return (
             this.props.rotationStyle !== nextProps.rotationStyle ||
             this.props.disabled !== nextProps.disabled ||
@@ -56,9 +59,9 @@ class SpriteInfo extends React.Component {
             Math.round(this.props.y) !== Math.round(nextProps.y)
         );
     }
-    render () {
+    render() {
         const {
-            stageSize
+            stageSize,
         } = this.props;
 
         const sprite = (
@@ -161,7 +164,7 @@ class SpriteInfo extends React.Component {
         if (stageSize === STAGE_DISPLAY_SIZES.small) {
             return (
                 <Box className={styles.spriteInfo}>
-                    <div className={classNames(styles.row, styles.rowPrimary)}>
+                    <div className={classNames(styles.row)}>
                         <div className={styles.group}>
                             {spriteNameInput}
                         </div>
@@ -170,13 +173,16 @@ class SpriteInfo extends React.Component {
                         {xPosition}
                         {yPosition}
                     </div>
+                    <p>请使用大舞台模式查看更多属性</p>
                 </Box>
             );
         }
 
         return (
             <Box className={styles.spriteInfo}>
-                <div className={classNames(styles.row, styles.rowPrimary)}>
+                <h3 className={classNames(styles.title)}>属性</h3>
+
+                <div className={classNames(styles.row)}>
                     <div className={styles.group}>
                         <Label
                             above={labelAbove}
@@ -185,55 +191,48 @@ class SpriteInfo extends React.Component {
                             {spriteNameInput}
                         </Label>
                     </div>
+                </div>
+                <div className={classNames(styles.row)}>
                     {xPosition}
                     {yPosition}
+
+                    <ToggleButtons
+                        className={styles.ml}
+                        buttons={[
+                            {
+                                handleClick: this.props.onClickVisible,
+                                icon: showIcon,
+                                isSelected: this.props.visible && !this.props.disabled,
+                                title: this.props.intl.formatMessage(messages.showSpriteAction)
+                            },
+                            {
+                                handleClick: this.props.onClickNotVisible,
+                                icon: hideIcon,
+                                isSelected: !this.props.visible && !this.props.disabled,
+                                title: this.props.intl.formatMessage(messages.hideSpriteAction)
+                            }
+                        ]}
+                        disabled={this.props.disabled}
+                    />
                 </div>
-                <div className={classNames(styles.row, styles.rowSecondary)}>
-                    <div className={labelAbove ? styles.column : styles.group}>
-                        {
-                            stageSize === STAGE_DISPLAY_SIZES.full || stageSize === STAGE_DISPLAY_SIZES.large ?
-                                <Label
-                                    secondary
-                                    text={showLabel}
-                                /> :
-                                null
-                        }
-                        <ToggleButtons
-                            buttons={[
-                                {
-                                    handleClick: this.props.onClickVisible,
-                                    icon: showIcon,
-                                    isSelected: this.props.visible && !this.props.disabled,
-                                    title: this.props.intl.formatMessage(messages.showSpriteAction)
-                                },
-                                {
-                                    handleClick: this.props.onClickNotVisible,
-                                    icon: hideIcon,
-                                    isSelected: !this.props.visible && !this.props.disabled,
-                                    title: this.props.intl.formatMessage(messages.hideSpriteAction)
-                                }
-                            ]}
+
+                <div className={classNames(styles.row, styles.largerInput)}>
+                    <Label
+                        secondary
+                        above={labelAbove}
+                        text={sizeLabel}
+                    >
+                        <BufferedInput
+                            small
                             disabled={this.props.disabled}
+                            label={sizeLabel}
+                            tabIndex="0"
+                            type="number"
+                            value={this.props.disabled ? '' : Math.round(this.props.size)}
+                            onSubmit={this.props.onChangeSize}
                         />
-                    </div>
-                    <div className={classNames(styles.group, styles.largerInput)}>
-                        <Label
-                            secondary
-                            above={labelAbove}
-                            text={sizeLabel}
-                        >
-                            <BufferedInput
-                                small
-                                disabled={this.props.disabled}
-                                label={sizeLabel}
-                                tabIndex="0"
-                                type="number"
-                                value={this.props.disabled ? '' : Math.round(this.props.size)}
-                                onSubmit={this.props.onChangeSize}
-                            />
-                        </Label>
-                    </div>
-                    <div className={classNames(styles.group, styles.largerInput)}>
+                    </Label>
+                    <div className={styles.ml}>
                         <DirectionPicker
                             direction={Math.round(this.props.direction)}
                             disabled={this.props.disabled}
@@ -243,7 +242,17 @@ class SpriteInfo extends React.Component {
                             onChangeRotationStyle={this.props.onChangeRotationStyle}
                         />
                     </div>
+
                 </div>
+                {
+                    !this.props.isStage && <>
+                        <h3 className={classNames(styles.title)}>组件</h3>
+                        <AddComponentBtn/>
+                        <ComponentAttribute/>
+                        <h3 className={classNames(styles.title)}>组件树</h3>
+                        <PrototypeChain/>
+                    </>
+                }
             </Box>
         );
     }
@@ -254,6 +263,7 @@ SpriteInfo.propTypes = {
         PropTypes.string,
         PropTypes.number
     ]),
+    isStage: PropTypes.bool,
     disabled: PropTypes.bool,
     intl: intlShape,
     name: PropTypes.string,

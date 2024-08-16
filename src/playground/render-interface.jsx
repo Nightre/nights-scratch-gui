@@ -84,7 +84,6 @@ class Interface extends React.Component {
 const WrappedInterface = compose(
     AppStateHOC,
     ErrorBoundaryHOC('TW Interface'),
-    TWProjectMetaFetcherHOC,
     ProjectFetcherHOC,
     TWStateManagerHOC,
     TWPackagerIntegrationHOC
