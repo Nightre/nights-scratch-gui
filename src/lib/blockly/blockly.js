@@ -32,7 +32,7 @@ const modifyBlockly = (Blockly) => {
             // In all other cases, statement and value inputs catch all preceding dummy
             // inputs, and cause a line break before following inputs.
             let CanNewRow = (!isSecondInputOnProcedure && (!lastType || lastType == Blockly.NEXT_STATEMENT || input.type == Blockly.NEXT_STATEMENT))
-            if (this.forceBreak) {
+            if (this.forceBreak && !this.collapse) {
                 if (previousRow && previousRow.length >= this.inputPerRow) {
                     CanNewRow = true
                 }
@@ -247,9 +247,7 @@ const modifyBlockly = (Blockly) => {
             if (y == 0) {
                 cursorX += this.RTL ? -iconWidth : iconWidth;
             }
-            if (this.forceBreak) {
-                console.log("row.type", row.type)
-            }
+
             if (row.type == Blockly.BlockSvg.INLINE) {
                 // Inline inputs.
                 for (var x = 0, input; input = row[x]; x++) {
@@ -294,7 +292,7 @@ const modifyBlockly = (Blockly) => {
                     steps.push(Blockly.BlockSvg.TOP_RIGHT_CORNER);
                 } else {
                     // Don't include corner radius - no corner (edge shape drawn).
-                    steps.push('H', cursorX - this.edgeShapeWidth_ );
+                    steps.push('H', cursorX - this.edgeShapeWidth_);
                 }
                 // Subtract CORNER_RADIUS * 2 to account for the top right corner
                 // and also the bottom right corner. Only move vertically the non-corner length.
@@ -319,7 +317,7 @@ const modifyBlockly = (Blockly) => {
                     Blockly.BlockSvg.drawStatementInputFromTopRight_(steps, cursorX,
                         inputRows.rightEdge, row);
                 }
-                
+
                 // Create statement connection.
                 connectionX = this.RTL ? -cursorX : cursorX;
                 input.connection.setOffsetInBlock(connectionX, cursorY);
@@ -439,7 +437,9 @@ const modifyBlockly = (Blockly) => {
         constructor(src, onclick) {
             super(src, 25, 25, undefined, false)
             this.initialized = false
-            this.onclick = onclick
+            if (onclick) {
+                this.onclick = onclick
+            }
         }
         init() {
             // Field has already been initialized once.
@@ -484,12 +484,26 @@ const modifyBlockly = (Blockly) => {
         }
     }
 
-    class EditButton extends FieldButton {
-        constructor(onclick) {
-            super(editImage, onclick)
+    class CollapseButton extends FieldButton {
+        constructor() {
+            super(collapseImage)
+        }
+        onclick() {
+            const block = this.sourceBlock_
+            block.collapse = !block.collapse
+            if (block.collapse) {
+                this.setValue(collapseOpen);
+            } else {
+                this.setValue(collapseImage);
+            }
+            if (!block.isInsertionMarker()) {
+                block.initSvg();
+                block.render();
+            }
         }
     }
-    const editImage = 'data:image/svg+xml;base64,PHN2ZyB0PSIxNzEyNjMxNzcxNDkzIiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjI3MzkiIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48cGF0aCBkPSJNNzQyLjQgODQ0LjggNzQyLjQgODQ0LjhjLTMyIDAtNjQtMTIuOC04OS42LTM4LjRsLTE2MC0xNjBjLTg5LjYgMjUuNi0xNzkuMiAwLTI0OS42LTY0QzE2Ni40IDUwNS42IDE0Ny4yIDM5Ni44IDE5MiAyOTQuNGM2LjQtMTIuOCAxMi44LTE5LjIgMjUuNi0xOS4yIDEyLjggMCAxOS4yIDAgMjUuNiA2LjRsMTE1LjIgMTE1LjIgNzAuNC03MC40TDMxMy42IDIxNy42QzMwNy4yIDIxMS4yIDMwMC44IDE5OC40IDMwMC44IDE5MmMwLTEyLjggNi40LTE5LjIgMTkuMi0yNS42IDk2LTQ0LjggMjExLjItMjUuNiAyODggNTEuMiA2NCA2NCA4OS42IDE2MCA2NCAyNDkuNkw4MzIgNjI3LjJjMjUuNiAyNS42IDM4LjQgNTcuNiAzOC40IDg5LjYgMCAzMi0xMi44IDY0LTM4LjQgODkuNkM4MDYuNCA4MzIgNzc0LjQgODQ0LjggNzQyLjQgODQ0Ljh6TTQ5OS4yIDU4Mi40YzYuNCAwIDE5LjIgNi40IDI1LjYgNi40bDE3Mi44IDE3Mi44YzEyLjggMTIuOCAyNS42IDE5LjIgNDQuOCAxOS4ybDAgMGMxOS4yIDAgMzItNi40IDQ0LjgtMTkuMiAxMi44LTEyLjggMTkuMi0yNS42IDE5LjItNDQuOCAwLTE5LjItNi40LTMyLTE5LjItNDQuOEw2MTQuNCA0OTkuMkM2MDEuNiA0OTIuOCA2MDEuNiA0NzMuNiA2MDggNDY3LjIgNjMzLjYgMzk2LjggNjE0LjQgMzIwIDU2My4yIDI2Mi40Yy00NC44LTQ0LjgtMTA4LjgtNjQtMTY2LjQtNTEuMmw4My4yIDgzLjJjMTkuMiAxOS4yIDE5LjIgNTEuMiAwIDcwLjRMMzkwLjQgNDU0LjRDMzcxLjIgNDczLjYgMzM5LjIgNDczLjYgMzIwIDQ1NC40TDIzNi44IDM3MS4yQzIyNCA0MjguOCAyNDMuMiA0OTIuOCAyODggNTM3LjZjNTEuMiA1MS4yIDEyOCA3MC40IDE5OC40IDQ0LjhDNDkyLjggNTgyLjQgNDk5LjIgNTgyLjQgNDk5LjIgNTgyLjR6IiBmaWxsPSIjZmZmZmZmIiBwLWlkPSIyNzQwIj48L3BhdGg+PC9zdmc+'
+    const collapseOpen = 'data:image/svg+xml;charset=utf-8;base64,CjxzdmcgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iOC45NDg3NCIgaGVpZ2h0PSI5LjkxODYyIiB2aWV3Qm94PSIwLDAsOC45NDg3NCw5LjkxODYyIj48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMjM1LjUyNTYzLC0xNzUuMDQwNjkpIj48ZyBmaWxsPSIjZmZmZmZmIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMCIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIj48cGF0aCBkPSJNMjQyLjI1NzUzLDE3NS4wNDA2OWgyLjIxNjg0djkuOTA5NzNoLTIuMjE2ODR6Ii8+PHBhdGggZD0iTTIzOC43ODE2MSwxNzUuMDQ5NThoMi4yMTY4NHY5LjkwOTczaC0yLjIxNjg0eiIvPjxwYXRoIGQ9Ik0yMzUuNTI1NjMsMTc1LjA0OTU4aDIuMjE2ODRsMCw5LjkwOTczaC0yLjIxNjg0eiIvPjwvZz48L2c+PC9zdmc+'
+    const collapseImage = 'data:image/svg+xml;charset=utf-8;base64,CjxzdmcgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iOS45MTg2MSIgaGVpZ2h0PSI4Ljk0ODc1IiB2aWV3Qm94PSIwLDAsOS45MTg2MSw4Ljk0ODc1Ij48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMjM1LjA0MDY5LC0xNzUuNTI1NjMpIj48ZyBmaWxsPSIjZmZmZmZmIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMCIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIj48cGF0aCBkPSJNMjM1LjA0MDY5LDE3Ny43NDI0N3YtMi4yMTY4NGg5LjkwOTczdjIuMjE2ODR6Ii8+PHBhdGggZD0iTTIzNS4wNDk1OCwxODEuMjE4Mzl2LTIuMjE2ODRoOS45MDk3M3YyLjIxNjg0eiIvPjxwYXRoIGQ9Ik0yMzUuMDQ5NTgsMTg0LjQ3NDM3di0yLjIxNjg0aDkuOTA5NzN2Mi4yMTY4NHoiLz48L2c+PC9nPjwvc3ZnPg=='
     // 图片
     const minusImage =
         'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAw' +
@@ -508,7 +522,7 @@ const modifyBlockly = (Blockly) => {
 
     Blockly.extensible.MinusButton = MinusButton
     Blockly.extensible.PlusButton = PlusButton
-    Blockly.extensible.EditButton = EditButton
+    Blockly.extensible.CollapseButton = CollapseButton
 
 
 
@@ -516,7 +530,6 @@ const modifyBlockly = (Blockly) => {
     Blockly.Blocks['structures_create_json'] = {
         init: function () {
             this.jsonInit({
-                "message0": 'Map {',
                 "category": Blockly.Categories.motion,
                 "extensions": ["colours_motion"]
             });
@@ -526,6 +539,11 @@ const modifyBlockly = (Blockly) => {
             this.size = 0
             this.inputPerRow = 2
             this.forceBreak = true
+            this.collapse = false
+
+            this.appendDummyInput()
+                .appendField('MAP{')
+                .appendField(new Blockly.extensible.CollapseButton())
             this.appendDummyInput("PLUSMINUS")
                 .appendField('}')
                 .appendField(new Blockly.extensible.PlusButton(() => {
@@ -562,10 +580,13 @@ const modifyBlockly = (Blockly) => {
         mutationToDom: function () {
             const container = document.createElement('mutation');
             container.setAttribute('size', `${this.size}`);
+            container.setAttribute('collapse', `${Number(this.collapse)}`);
+
             return container;
         },
         domToMutation: function (xmlElement) {
             this.newSize = parseInt(xmlElement.getAttribute('size'), 0);
+            this.collapse = Boolean(parseInt(xmlElement.getAttribute('collapse'), 0))
             this.updateShape()
         },
     };
@@ -573,16 +594,22 @@ const modifyBlockly = (Blockly) => {
     Blockly.Blocks['structures_create_list'] = {
         init: function () {
             this.jsonInit({
-                "message0": 'List [',
                 "category": Blockly.Categories.motion,
                 "extensions": ["colours_motion", "output_string"]
             });
             this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
             this.setOutput(true, 'String');
 
+
             this.size = 0
             this.inputPerRow = 1
             this.forceBreak = true
+            this.collapse = false
+
+            this.appendDummyInput()
+                .appendField('LIST[')
+                .appendField(new Blockly.extensible.CollapseButton())
+
             this.appendDummyInput("PLUSMINUS")
                 .appendField(']')
                 .appendField(new Blockly.extensible.PlusButton(() => {
@@ -613,10 +640,13 @@ const modifyBlockly = (Blockly) => {
         mutationToDom: function () {
             const container = document.createElement('mutation');
             container.setAttribute('size', `${this.size}`);
+            container.setAttribute('collapse', `${Number(this.collapse)}`);
+
             return container;
         },
         domToMutation: function (xmlElement) {
             this.newSize = parseInt(xmlElement.getAttribute('size'), 0);
+            this.collapse = Boolean(parseInt(xmlElement.getAttribute('collapse'), 0))
             this.updateShape()
         },
     };
