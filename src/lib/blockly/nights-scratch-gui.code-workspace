@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"path": "../../.."
+		},
+		{
+			"path": "../../../../MewoEditor/scratch-vm"
+		}
+	],
+	"settings": {
+		"editor.quickSuggestions": {
+			"strings": true
+		},
+		"tailwindCSS.includeLanguages": {
+			"typescript": "javascript",
+			"typescriptreact": "javascript"
+		},
+		"tailwindCSS.emmetCompletions": true,
+		"workbench.editor.wrapTabs": true
+	}
+}

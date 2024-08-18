@@ -1,7 +1,27 @@
 
-const modifyBlockly = (Blockly) => {
+const modifyBlockly = (Blockly, vm) => {
 
-
+    const jsonForMenuBlock = function (name, menuOptionsFn, colors) {
+        return {
+            message0: '%1',
+            args0: [
+                {
+                    name,
+                    type: 'field_dropdown',
+                    options: function () {
+                        return menuOptionsFn();
+                    }
+                }
+            ],
+            inputsInline: true,
+            output: 'String',
+            colour: colors.secondary,
+            colourSecondary: colors.secondary,
+            colourTertiary: colors.tertiary,
+            colourQuaternary: colors.quaternary,
+            outputShape: ScratchBlocks.OUTPUT_SHAPE_ROUND
+        };
+    };
     Blockly.BlockSvg.prototype.renderCompute_ = function (iconWidth) {
         var inputList = this.inputList;
         var inputRows = [];
@@ -423,7 +443,7 @@ const modifyBlockly = (Blockly) => {
                 ),
             );
         }
-        this.moveInputBefore('PLUSMINUS', null)
+
         Blockly.Events.setGroup(false);
 
         this.rendered = wasRendered;
@@ -487,15 +507,19 @@ const modifyBlockly = (Blockly) => {
     class CollapseButton extends FieldButton {
         constructor() {
             super(collapseImage)
+            this.updateIcon()
         }
-        onclick() {
-            const block = this.sourceBlock_
-            block.collapse = !block.collapse
-            if (block.collapse) {
+        updateIcon() {
+            if (this.sourceBlock_?.collapse) {
                 this.setValue(collapseOpen);
             } else {
                 this.setValue(collapseImage);
             }
+        }
+        onclick() {
+            const block = this.sourceBlock_
+            block.collapse = !block.collapse
+            this.updateIcon()
             if (!block.isInsertionMarker()) {
                 block.initSvg();
                 block.render();
@@ -523,10 +547,84 @@ const modifyBlockly = (Blockly) => {
     Blockly.extensible.MinusButton = MinusButton
     Blockly.extensible.PlusButton = PlusButton
     Blockly.extensible.CollapseButton = CollapseButton
+    Blockly.extensible.FieldButton = FieldButton
 
+    Blockly.Blocks['control_get_previous_clone'] = {
+        init: function () {
+            this.jsonInit({
+                "message0": "上一个克隆体",
+                "category": Blockly.Categories.control,
+                "extensions": ["colours_control", "output_string"]
+            });
+        }
+    }
 
+    Blockly.Blocks['control_call'] = {
+        init: function () {
+            this.jsonInit({
+                "message0": "运行 %1 参数 (",
+                "args0": [
+                    {
+                        "type": "input_value",
+                        "name": "FUNCTION",
+                    },
+                ],
+                "category": Blockly.Categories.control,
+                "extensions": ["colours_control", "shape_statement"]
+            });
+            this.size = 0
+            this.appendDummyInput("PLUSMINUS")
+                .appendField(')')
+                .appendField(new Blockly.extensible.PlusButton(() => {
+                    this.newSize = this.size + 1;
+                    this.updateShape()
+                }))
+                .appendField(new Blockly.extensible.MinusButton(() => {
+                    this.newSize = Math.max(0, this.size - 1);
+                    this.updateInput();
+                }))
+        },
+        attachTextShadow_: Blockly.extensible.attachTextShadow_,
+        updateShape: Blockly.extensible.updateShape,
+        updateInput: function () {
+            const key = 'ADD'
+            this.size = this.newSize
+            for (var i = 0; i < this.size; i++) {
+                if (!this.getInput(key + i)) {
+                    const input = this.appendValueInput(key + i)
+                    this.attachTextShadow_(input, '')
+                    if (i > 0) {
+                        input.appendField(',')
+                    }
+                }
+            }
+            while (this.getInput(key + i)) {
+                this.removeInput(key + i);
+                i++
+            }
+            this.moveInputBefore('PLUSMINUS', null)
+        },
+        mutationToDom: function () {
+            const container = document.createElement('mutation');
+            container.setAttribute('size', `${this.size}`);
 
+            return container;
+        },
+        domToMutation: function (xmlElement) {
+            this.newSize = parseInt(xmlElement.getAttribute('size'), 0);
+            this.updateShape()
+        },
+    }
 
+    Blockly.Blocks["structures_self"] = {
+        init: function () {
+            this.jsonInit({
+                "message0": "自身",
+                "category": Blockly.Categories.motion,
+                "extensions": ["colours_motion", "output_string"]
+            });
+        }
+    }
     Blockly.Blocks['structures_create_json'] = {
         init: function () {
             this.jsonInit({
@@ -575,7 +673,7 @@ const modifyBlockly = (Blockly) => {
                 this.removeInput(key + i);
                 i++
             }
-
+            this.moveInputBefore('PLUSMINUS', null)
         },
         mutationToDom: function () {
             const container = document.createElement('mutation');
@@ -636,6 +734,7 @@ const modifyBlockly = (Blockly) => {
                 this.removeInput(key + i);
                 i++
             }
+            this.moveInputBefore('PLUSMINUS', null)
         },
         mutationToDom: function () {
             const container = document.createElement('mutation');
@@ -649,6 +748,93 @@ const modifyBlockly = (Blockly) => {
             this.collapse = Boolean(parseInt(xmlElement.getAttribute('collapse'), 0))
             this.updateShape()
         },
+    };
+
+    Blockly.Blocks['structures_get_attribute'] = {
+        init: function () {
+            this.jsonInit({
+                "message0": "获取 %1",
+                "args0": [
+                    {
+                        "type": "input_value",
+                        "name": "OBJECT"
+                    },
+                ],
+                "category": Blockly.Categories.motion,
+                "extensions": ["colours_motion"]
+            });
+            this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
+            this.setOutput(true, 'String');
+
+            this.size = 1
+            this.appendDummyInput("PLUSMINUS")
+                .appendField(new Blockly.extensible.PlusButton(() => {
+                    this.newSize = this.size + 1;
+                    this.updateShape()
+                }))
+                .appendField(new Blockly.extensible.MinusButton(() => {
+                    this.newSize = Math.max(1, this.size - 1);
+                    this.updateInput();
+                }))
+        },
+        attachTextShadow_: Blockly.extensible.attachTextShadow_,
+        updateShape: Blockly.extensible.updateShape,
+        updateInput: function () {
+            const key = 'ADD'
+            this.size = this.newSize
+            for (var i = 0; i < this.size; i++) {
+                if (!this.getInput(key + i)) {
+                    const input = this.appendValueInput(key + i)
+                    if (i == 0) {
+                        input.appendField('的')
+                    }
+                    this.attachTextShadow_(input, '')
+                    if (i > 0) {
+                        input.appendField('的')
+                    }
+                }
+            }
+            while (this.getInput(key + i)) {
+                this.removeInput(key + i);
+                i++
+            }
+            this.moveInputBefore('PLUSMINUS', null)
+        },
+        mutationToDom: function () {
+            const container = document.createElement('mutation');
+            container.setAttribute('size', `${this.size}`);
+            return container;
+        },
+        domToMutation: function (xmlElement) {
+            this.newSize = parseInt(xmlElement.getAttribute('size'), 0);
+            this.updateShape()
+        },
+    };
+
+    Blockly.WorkspaceSvg.prototype.reportDom = function (id, callback, callbackUnmount) {
+        var block = this.getBlockById(id);
+        if (!block) {
+            throw 'Tried to report value on block that does not exist.';
+        }
+        Blockly.DropDownDiv.hideWithoutAnimation();
+        Blockly.DropDownDiv.clearContent();
+
+        var contentDiv = Blockly.DropDownDiv.getContentDiv();
+
+        contentDiv.setAttribute('class', 'valueReportBox');
+        callback(contentDiv)
+        Blockly.DropDownDiv.callbackUnmount = callbackUnmount
+        Blockly.DropDownDiv.setColour(
+            Blockly.Colours.valueReportBackground,
+            Blockly.Colours.valueReportBorder
+        );
+        Blockly.DropDownDiv.showPositionedByBlock(this, block);
+    };
+    Blockly.DropDownDiv.clearContent = function () {
+        Blockly.DropDownDiv.callbackUnmount && Blockly.DropDownDiv.callbackUnmount(Blockly.DropDownDiv.getContentDiv())
+        Blockly.DropDownDiv.callbackUnmount = undefined
+        Blockly.DropDownDiv.content_.innerHTML = '';
+        Blockly.DropDownDiv.content_.style.width = '';
     };
 
     return Blockly

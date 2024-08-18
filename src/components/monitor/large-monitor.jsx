@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './monitor.css';
+import ValueRender from '../value-render/value-render.jsx';
 
 const LargeMonitor = ({categoryColor, value}) => (
     <div className={styles.largeMonitor}>
@@ -11,7 +12,7 @@ const LargeMonitor = ({categoryColor, value}) => (
                 color: categoryColor.text
             }}
         >
-            {value}
+            <ValueRender value={value}/>
         </div>
     </div>
 );
@@ -21,10 +22,6 @@ LargeMonitor.propTypes = {
         background: PropTypes.string.isRequired,
         text: PropTypes.string.isRequired
     }).isRequired,
-    value: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
-    ])
 };
 
 export default LargeMonitor;

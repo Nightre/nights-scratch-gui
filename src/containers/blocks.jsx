@@ -7,7 +7,7 @@ import React from 'react';
 import { intlShape, injectIntl, defineMessages } from 'react-intl';
 import VMScratchBlocks from '../lib/blocks';
 import VM from 'scratch-vm';
-
+import ReactDOM from 'react-dom';
 import log from '../lib/log.js';
 import Prompt from './prompt.jsx';
 import BlocksComponent from '../components/blocks/blocks.jsx';
@@ -45,6 +45,7 @@ import LoadScratchBlocksHOC from '../lib/tw-load-scratch-blocks-hoc.jsx';
 import { findTopBlock } from '../lib/backpack/code-payload.js';
 import { gentlyRequestPersistentStorage } from '../lib/tw-persistent-storage.js';
 import modifyBlockly from '../lib/blockly/blockly.js';
+import ValueRender from '../components/value-render/value-render.jsx';
 
 // TW: Strings we add to scratch-blocks are localized here
 const messages = defineMessages({
@@ -90,7 +91,7 @@ const DroppableBlocks = DropAreaHOC([
 class Blocks extends React.Component {
     constructor(props) {
         super(props);
-        this.ScratchBlocks = modifyBlockly(VMScratchBlocks(props.vm, false));
+        this.ScratchBlocks = modifyBlockly(VMScratchBlocks(props.vm, false), props.vm);
         window.ScratchBlocks = this.ScratchBlocks;
         AddonHooks.blockly = this.ScratchBlocks;
         AddonHooks.blocklyCallbacks.forEach(i => i());
@@ -434,7 +435,12 @@ class Blocks extends React.Component {
         this.workspace.glowBlock(data.id, false);
     }
     onVisualReport(data) {
-        this.workspace.reportValue(data.id, data.value);
+        this.workspace.reportDom(data.id, 
+            (dom) => {
+                ReactDOM.render(<ValueRender value={data.value} />, dom)
+            }, 
+            (dom) => ReactDOM.unmountComponentAtNode(dom)
+        );
     }
     getToolboxXML() {
         // Use try/catch because this requires digging pretty deep into the VM

@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
-import React from 'react';
-import {defineMessages, injectIntl, intlShape} from 'react-intl';
+import React, { useState } from 'react';
+import { defineMessages, injectIntl, intlShape } from 'react-intl';
 
 import Box from '../box/box.jsx';
 import SpriteInfo from '../../containers/sprite-info.jsx';
 import SpriteList from './sprite-list.jsx';
 import ActionMenu from '../action-menu/action-menu.jsx';
-import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants';
-import {isRtl} from '@turbowarp/scratch-l10n';
+import { STAGE_DISPLAY_SIZES } from '../../lib/layout-constants';
+import { isRtl } from '@turbowarp/scratch-l10n';
 
 import styles from './sprite-selector.css';
 
@@ -75,6 +75,7 @@ const SpriteSelectorComponent = function (props) {
         selectedSprite = {};
         spriteInfoDisabled = true;
     }
+
     return (
         <Box
             className={styles.spriteSelector}

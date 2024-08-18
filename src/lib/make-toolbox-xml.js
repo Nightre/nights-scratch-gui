@@ -440,6 +440,15 @@ const control = function (isInitialSetup, isStage, targetId, colors) {
                     <shadow type="control_create_clone_of_menu"/>
                 </value>
             </block>
+            <block type="control_get_previous_clone">
+            </block>
+            <block type="control_call">
+                <value name="FUNCTION">
+                    <shadow type="text">
+                        <field name="TEXT"></field>
+                    </shadow>
+                </value>
+            </block>
             <block type="control_delete_this_clone"/>
         `}
         ${categorySeparator}
@@ -762,9 +771,18 @@ const structures = function (isInitialSetup, isStage, targetId, colors) {
         id="structures"
         colour="${colors.primary}"
         secondaryColour="${colors.tertiary}">
+        <block type="structures_self">
+        </block>
         <block type="structures_create_json">
         </block>
         <block type="structures_create_list">
+        </block>
+        <block type="structures_get_attribute">
+            <value name="OBJECT">
+                <shadow type="text">
+                    <field name="TEXT">Nights</field>
+                </shadow>
+            </value>
         </block>
     </category>
     `;
@@ -778,17 +796,7 @@ const lambda = function (isInitialSetup, isStage, targetId, colors) {
         id="lambda"
         colour="${colors.primary}"
         secondaryColour="${colors.tertiary}">
-        <block type="lambda_create_json">
-            <value name="NUM1">
-                <shadow type="math_number">
-                    <field name="NUM"/>
-                </shadow>
-            </value>
-            <value name="NUM2">
-                <shadow type="math_number">
-                    <field name="NUM"/>
-                </shadow>
-            </value>
+        <block type="lambda_function">
         </block>
     </category>
     `;
@@ -860,7 +868,7 @@ const makeToolboxXML = function (isInitialSetup, isStage = true, targetId, categ
         sensingXML, gap,
         operatorsXML, gap,
 
-        lambdaBlocksXML, gap,
+        //lambdaBlocksXML, gap,
         structuresBlocksXML, gap,
 
         variablesXML, gap,

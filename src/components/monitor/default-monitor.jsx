@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './monitor.css';
+import ValueRender from '../value-render/value-render.jsx';
 
 const DefaultMonitor = ({categoryColor, label, value}) => (
+    
     <div className={styles.defaultMonitor}>
         <div className={styles.row}>
             <div className={styles.label}>
@@ -15,7 +17,7 @@ const DefaultMonitor = ({categoryColor, label, value}) => (
                     color: categoryColor.text
                 }}
             >
-                {value}
+                <ValueRender value={value}/>
             </div>
         </div>
     </div>
@@ -27,10 +29,6 @@ DefaultMonitor.propTypes = {
         text: PropTypes.string.isRequired
     }).isRequired,
     label: PropTypes.string.isRequired,
-    value: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
-    ])
 };
 
 export default DefaultMonitor;

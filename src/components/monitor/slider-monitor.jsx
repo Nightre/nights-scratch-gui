@@ -3,9 +3,13 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import styles from './monitor.css';
+function isNumber(value) {
+    return !isNaN(parseFloat(value)) && isFinite(value);
+}
 
-const SliderMonitor = ({categoryColor, isDiscrete, label, min, max, value, onSliderUpdate}) => (
-    <div className={styles.defaultMonitor}>
+const SliderMonitor = ({ categoryColor, isDiscrete, label, min, max, value, onSliderUpdate }) => {
+    const show = isNumber(value)
+    return <div className={styles.defaultMonitor}>
         <div className={styles.row}>
             <div className={styles.label}>
                 {label}
@@ -17,7 +21,7 @@ const SliderMonitor = ({categoryColor, isDiscrete, label, min, max, value, onSli
                     color: categoryColor.text
                 }}
             >
-                {value}
+                {show ? value : "无法使用滑杆"}
             </div>
         </div>
         <div className={styles.row}>
@@ -27,13 +31,14 @@ const SliderMonitor = ({categoryColor, isDiscrete, label, min, max, value, onSli
                 min={min}
                 step={isDiscrete ? 1 : 0.01}
                 type="range"
-                value={value}
+                value={show ? value : 0}
+                disabled={!show}
                 onChange={onSliderUpdate}
             />
         </div>
 
     </div>
-);
+};
 
 SliderMonitor.propTypes = {
     categoryColor: PropTypes.shape({
@@ -45,10 +50,6 @@ SliderMonitor.propTypes = {
     max: PropTypes.number,
     min: PropTypes.number,
     onSliderUpdate: PropTypes.func.isRequired,
-    value: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
-    ])
 };
 
 SliderMonitor.defaultProps = {

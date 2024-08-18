@@ -1,0 +1,20 @@
+.text {
+    margin: 0;
+    text-align: start;
+}
+
+.list {
+    display: flex;
+}
+
+.object-row {
+    display: flex;
+}
+
+.key {
+    color: rgb(97, 97, 97);
+}
+
+.list .key {
+    margin: 0px 0.2rem;
+}
