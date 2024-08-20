@@ -51,10 +51,10 @@ const ValueRender = ({ value }) => {
         return <ValueList value={value} />
     } else if (typeof value == "object" && value != null) {
         return <ValueObject value={value} />
-    } else if (false) {
+    } else if (typeof value == "function") {
         return <>
             <img src={funcIcon} />
-            <p className={classNames(styles.text, styles.key)}>{value.funcName.split("%")[0].trim() || " Function"}</p>
+            <p className={classNames(styles.text, styles.key)}>{" Function"}</p>
         </>
     } else {
         return "NULL"
