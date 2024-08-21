@@ -435,7 +435,6 @@ const modifyBlockly = (Blockly, vm) => {
         var newExtraState = Blockly.Xml.domToText(this.mutationToDom(this));
 
         if (oldExtraState !== newExtraState) {
-            console.log(oldExtraState, newExtraState)
             Blockly.Events.fire(
                 new Blockly.Events.BlockChange(
                     this, 'mutation', null,
