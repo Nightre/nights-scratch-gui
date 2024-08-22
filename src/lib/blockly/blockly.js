@@ -1,27 +1,5 @@
 
 const modifyBlockly = (Blockly, vm) => {
-
-    const jsonForMenuBlock = function (name, menuOptionsFn, colors) {
-        return {
-            message0: '%1',
-            args0: [
-                {
-                    name,
-                    type: 'field_dropdown',
-                    options: function () {
-                        return menuOptionsFn();
-                    }
-                }
-            ],
-            inputsInline: true,
-            output: 'String',
-            colour: colors.secondary,
-            colourSecondary: colors.secondary,
-            colourTertiary: colors.tertiary,
-            colourQuaternary: colors.quaternary,
-            outputShape: ScratchBlocks.OUTPUT_SHAPE_ROUND
-        };
-    };
     Blockly.BlockSvg.prototype.renderCompute_ = function (iconWidth) {
         var inputList = this.inputList;
         var inputRows = [];
@@ -434,6 +412,7 @@ const modifyBlockly = (Blockly, vm) => {
 
         var newExtraState = Blockly.Xml.domToText(this.mutationToDom(this));
 
+        console.log("mutation", oldExtraState, newExtraState, oldExtraState !== newExtraState)
         if (oldExtraState !== newExtraState) {
             Blockly.Events.fire(
                 new Blockly.Events.BlockChange(
@@ -580,7 +559,7 @@ const modifyBlockly = (Blockly, vm) => {
                 }))
                 .appendField(new Blockly.extensible.MinusButton(() => {
                     this.newSize = Math.max(0, this.size - 1);
-                    this.updateInput();
+                    this.updateShape();
                 }))
         },
         attachTextShadow_: Blockly.extensible.attachTextShadow_,
@@ -649,7 +628,7 @@ const modifyBlockly = (Blockly, vm) => {
                 }))
                 .appendField(new Blockly.extensible.MinusButton(() => {
                     this.newSize = Math.max(0, this.size - 2);
-                    this.updateInput();
+                    this.updateShape();
                 }))
         },
         attachTextShadow_: Blockly.extensible.attachTextShadow_,
@@ -715,7 +694,7 @@ const modifyBlockly = (Blockly, vm) => {
                 }))
                 .appendField(new Blockly.extensible.MinusButton(() => {
                     this.newSize = Math.max(0, this.size - 1);
-                    this.updateInput();
+                    this.updateShape();
                 }))
         },
         attachTextShadow_: Blockly.extensible.attachTextShadow_,
@@ -749,14 +728,30 @@ const modifyBlockly = (Blockly, vm) => {
         },
     };
 
+    const attributeFunc = {
+        mutationToDom: function () {
+            const container = document.createElement('mutation');
+            container.setAttribute('size', `${this.size}`);
+            return container;
+        },
+        domToMutation: function (xmlElement) {
+            this.newSize = parseInt(xmlElement.getAttribute('size'), 0);
+            this.updateShape()
+        },
+    }
+
     Blockly.Blocks['structures_get_attribute'] = {
         init: function () {
             this.jsonInit({
-                "message0": "获取 %1",
+                "message0": "获取 %1 的 %2",
                 "args0": [
                     {
                         "type": "input_value",
                         "name": "OBJECT"
+                    },
+                    {
+                        "type": "input_value",
+                        "name": "ADD0"
                     },
                 ],
                 "category": Blockly.Categories.motion,
@@ -773,7 +768,7 @@ const modifyBlockly = (Blockly, vm) => {
                 }))
                 .appendField(new Blockly.extensible.MinusButton(() => {
                     this.newSize = Math.max(1, this.size - 1);
-                    this.updateInput();
+                    this.updateShape();
                 }))
         },
         attachTextShadow_: Blockly.extensible.attachTextShadow_,
@@ -799,16 +794,226 @@ const modifyBlockly = (Blockly, vm) => {
             }
             this.moveInputBefore('PLUSMINUS', null)
         },
-        mutationToDom: function () {
-            const container = document.createElement('mutation');
-            container.setAttribute('size', `${this.size}`);
-            return container;
-        },
-        domToMutation: function (xmlElement) {
-            this.newSize = parseInt(xmlElement.getAttribute('size'), 0);
-            this.updateShape()
-        },
+        mutationToDom: attributeFunc.mutationToDom,
+        domToMutation: attributeFunc.domToMutation
     };
+
+    Blockly.Blocks['structures_set_attribute'] = {
+        init: function () {
+            this.jsonInit({
+                "message0": "设置 %1 的 %2 为 %3",
+                "args0": [
+                    {
+                        "type": "input_value",
+                        "name": "OBJECT"
+                    },
+                    {
+                        "type": "input_value",
+                        "name": "ADD0"
+                    },
+                    {
+                        "type": "input_value",
+                        "name": "VALUE"
+                    },
+                ],
+                "category": Blockly.Categories.motion,
+                "extensions": ["colours_motion", "shape_statement"]
+            });
+
+            this.size = 1
+            this.appendDummyInput("PLUSMINUS")
+                .appendField(new Blockly.extensible.PlusButton(() => {
+                    this.newSize = this.size + 1;
+                    this.updateShape()
+                }))
+                .appendField(new Blockly.extensible.MinusButton(() => {
+                    this.newSize = Math.max(1, this.size - 1);
+                    this.updateShape();
+                }))
+        },
+        attachTextShadow_: Blockly.extensible.attachTextShadow_,
+        updateShape: Blockly.extensible.updateShape,
+        updateInput: function () {
+            const key = 'ADD'
+            this.size = this.newSize
+            for (var i = 0; i < this.size; i++) {
+                if (!this.getInput(key + i)) {
+                    const input = this.appendValueInput(key + i)
+                    if (i == 0) {
+                        input.appendField('的')
+                    }
+                    this.attachTextShadow_(input, '')
+                    if (i > 0) {
+                        input.appendField('的')
+                    }
+                }
+            }
+            while (this.getInput(key + i)) {
+                this.removeInput(key + i);
+                i++
+            }
+            this.moveInputBefore('VALUE', null)
+            this.moveInputBefore('PLUSMINUS', null)
+        },
+        mutationToDom: attributeFunc.mutationToDom,
+        domToMutation: attributeFunc.domToMutation
+    };
+
+    Blockly.Blocks['structures_get_list_length'] = {
+        init: function () {
+            this.jsonInit({
+                "message0": "列表 %1 的长度",
+                "args0": [
+                    {
+                        "type": "input_value",
+                        "name": "OBJECT"
+                    },
+                ],
+                "category": Blockly.Categories.motion,
+                "extensions": ["colours_motion", "output_string"]
+            });
+        }
+    }
+
+    Blockly.Blocks['structures_list_includes'] = {
+        init: function () {
+            this.jsonInit({
+                "message0": "列表 %1 包含 %2",
+                "args0": [
+                    {
+                        "type": "input_value",
+                        "name": "OBJECT"
+                    },
+                    {
+                        "type": "input_value",
+                        "name": "VALUE"
+                    },
+                ],
+                "category": Blockly.Categories.motion,
+                "extensions": ["colours_motion", "output_boolean"]
+            });
+        }
+    }
+
+    Blockly.Blocks['structures_delete_list'] = {
+        init: function () {
+            this.jsonInit({
+                "message0": "删除列表 %1 的第 %2 项",
+                "args0": [
+                    {
+                        "type": "input_value",
+                        "name": "OBJECT"
+                    },
+                    {
+                        "type": "input_value",
+                        "name": "INDEX"
+                    },
+                ],
+                "category": Blockly.Categories.motion,
+                "extensions": ["colours_motion", "shape_statement"]
+            });
+        }
+    }
+
+    Blockly.Blocks['structures_insert_list'] = {
+        init: function () {
+            this.jsonInit({
+                "message0": "从列表 %1 的第 %2 项插入 %3",
+                "args0": [
+                    {
+                        "type": "input_value",
+                        "name": "OBJECT"
+                    },
+                    {
+                        "type": "input_value",
+                        "name": "INDEX"
+                    },
+                    {
+                        "type": "input_value",
+                        "name": "VALUE"
+                    },
+                ],
+                "category": Blockly.Categories.motion,
+                "extensions": ["colours_motion", "shape_statement"]
+            });
+        }
+    }
+
+    Blockly.Blocks['structures_slice_list'] = {
+        init: function () {
+            this.jsonInit({
+                "message0": "截取列表 %1 从第 %2 项到 %3 项",
+                "args0": [
+                    {
+                        "type": "input_value",
+                        "name": "OBJECT"
+                    },
+                    {
+                        "type": "input_value",
+                        "name": "INDEX0"
+                    },
+                    {
+                        "type": "input_value",
+                        "name": "INDEX1"
+                    },
+                ],
+                "category": Blockly.Categories.motion,
+                "extensions": ["colours_motion", "output_string"]
+            });
+        }
+    }
+
+    // JSON
+
+    Blockly.Blocks['structures_delete_map'] = {
+        init: function () {
+            this.jsonInit({
+                "message0": "删除MAP %1 键 %2",
+                "args0": [
+                    {
+                        "type": "input_value",
+                        "name": "OBJECT"
+                    },
+                    {
+                        "type": "input_value",
+                        "name": "KEY"
+                    },
+                ],
+                "category": Blockly.Categories.motion,
+                "extensions": ["colours_motion", "shape_statement"]
+            });
+        }
+    }
+    Blockly.Blocks['structures_get_all_key'] = {
+        init: function () {
+            this.jsonInit({
+                "message0": "获取MAP %1 所有键",
+                "args0": [
+                    {
+                        "type": "input_value",
+                        "name": "OBJECT"
+                    },
+                ],
+                "category": Blockly.Categories.motion,
+                "extensions": ["colours_motion", "output_string"]
+            });
+        }
+    }
+    Blockly.Blocks['structures_get_all_value'] = {
+        init: function () {
+            this.jsonInit({
+                "message0": "获取MAP %1 所有值",
+                "args0": [
+                    {
+                        "type": "input_value",
+                        "name": "OBJECT"
+                    },
+                ],
+                "category": Blockly.Categories.motion,
+                "extensions": ["colours_motion", "output_string"]
+            });
+        }
+    }
 
     Blockly.WorkspaceSvg.prototype.reportDom = function (id, callback, callbackUnmount) {
         var block = this.getBlockById(id);

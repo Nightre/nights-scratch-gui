@@ -777,10 +777,134 @@ const structures = function (isInitialSetup, isStage, targetId, colors) {
         </block>
         <block type="structures_create_list">
         </block>
+        ${blockSeparator}
         <block type="structures_get_attribute">
             <value name="OBJECT">
                 <shadow type="text">
-                    <field name="TEXT">Nights</field>
+                    <field name="TEXT"></field>
+                </shadow>
+            </value>
+            <value name="ADD0">
+                <shadow type="text">
+                    <field name="TEXT"></field>
+                </shadow>
+            </value>
+        </block>
+        <block type="structures_set_attribute">
+            <value name="OBJECT">
+                <shadow type="text">
+                    <field name="TEXT"></field>
+                </shadow>
+            </value>
+            <value name="ADD0">
+                <shadow type="text">
+                    <field name="TEXT"></field>
+                </shadow>
+            </value>
+            <value name="VALUE">
+                <shadow type="text">
+                    <field name="TEXT">value</field>
+                </shadow>
+            </value>
+        </block>
+        ${blockSeparator}
+        <block type="structures_delete_list">
+            <value name="OBJECT">
+                <shadow type="text">
+                    <field name="TEXT"></field>
+                </shadow>
+            </value>
+            <value name="INDEX">
+                <shadow type="text">
+                    <field name="TEXT">0</field>
+                </shadow>
+            </value>
+
+        </block>
+
+        <block type="structures_insert_list">
+            <value name="OBJECT">
+                <shadow type="text">
+                    <field name="TEXT"></field>
+                </shadow>
+            </value>
+            <value name="INDEX">
+                <shadow type="text">
+                    <field name="TEXT">0</field>
+                </shadow>
+            </value>
+            <value name="VALUE">
+                <shadow type="text">
+                    <field name="TEXT">value</field>
+                </shadow>
+            </value>
+        </block>
+
+        <block type="structures_get_list_length">
+            <value name="OBJECT">
+                <shadow type="text">
+                    <field name="TEXT"></field>
+                </shadow>
+            </value>
+
+        </block>
+
+        <block type="structures_list_includes">
+            <value name="OBJECT">
+                <shadow type="text">
+                    <field name="TEXT"></field>
+                </shadow>
+            </value>
+            <value name="VALUE">
+                <shadow type="text">
+                    <field name="TEXT">value</field>
+                </shadow>
+            </value>
+        </block>
+
+        <block type="structures_slice_list">
+            <value name="OBJECT">
+                <shadow type="text">
+                    <field name="TEXT"></field>
+                </shadow>
+            </value>
+            <value name="INDEX0">
+                <shadow type="text">
+                    <field name="TEXT">1</field>
+                </shadow>
+            </value>
+            <value name="INDEX1">
+                <shadow type="text">
+                    <field name="TEXT">5</field>
+                </shadow>
+            </value>
+        </block>
+        ${blockSeparator}
+        <block type="structures_delete_map">
+            <value name="OBJECT">
+                <shadow type="text">
+                    <field name="TEXT"></field>
+                </shadow>
+            </value>
+            <value name="KEY">
+                <shadow type="text">
+                    <field name="TEXT">key</field>
+                </shadow>
+            </value>
+        </block>
+
+        <block type="structures_get_all_key">
+            <value name="OBJECT">
+                <shadow type="text">
+                    <field name="TEXT"></field>
+                </shadow>
+            </value>
+        </block>
+
+        <block type="structures_get_all_value">
+            <value name="OBJECT">
+                <shadow type="text">
+                    <field name="TEXT"></field>
                 </shadow>
             </value>
         </block>
