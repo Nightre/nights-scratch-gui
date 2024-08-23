@@ -1041,6 +1041,7 @@ const modifyBlockly = (Blockly, vm) => {
         Blockly.DropDownDiv.content_.style.width = '';
     };
 
+
     return Blockly
 }
 

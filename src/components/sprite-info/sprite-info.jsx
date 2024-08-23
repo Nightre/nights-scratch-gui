@@ -184,36 +184,31 @@ class SpriteInfo extends React.Component {
 
                 <div className={classNames(styles.row)}>
                     <div className={styles.group}>
-                        <Label
-                            above={labelAbove}
-                            text={sprite}
-                        >
-                            {spriteNameInput}
-                        </Label>
+                        {spriteNameInput}
+                        <ToggleButtons
+                            className={styles.ml}
+                            buttons={[
+                                {
+                                    handleClick: this.props.onClickVisible,
+                                    icon: showIcon,
+                                    isSelected: this.props.visible && !this.props.disabled,
+                                    title: this.props.intl.formatMessage(messages.showSpriteAction)
+                                },
+                                {
+                                    handleClick: this.props.onClickNotVisible,
+                                    icon: hideIcon,
+                                    isSelected: !this.props.visible && !this.props.disabled,
+                                    title: this.props.intl.formatMessage(messages.hideSpriteAction)
+                                }
+                            ]}
+                            disabled={this.props.disabled}
+                        />
                     </div>
                 </div>
+
                 <div className={classNames(styles.row)}>
                     {xPosition}
                     {yPosition}
-
-                    <ToggleButtons
-                        className={styles.ml}
-                        buttons={[
-                            {
-                                handleClick: this.props.onClickVisible,
-                                icon: showIcon,
-                                isSelected: this.props.visible && !this.props.disabled,
-                                title: this.props.intl.formatMessage(messages.showSpriteAction)
-                            },
-                            {
-                                handleClick: this.props.onClickNotVisible,
-                                icon: hideIcon,
-                                isSelected: !this.props.visible && !this.props.disabled,
-                                title: this.props.intl.formatMessage(messages.hideSpriteAction)
-                            }
-                        ]}
-                        disabled={this.props.disabled}
-                    />
                 </div>
 
                 <div className={classNames(styles.row, styles.largerInput)}>
@@ -247,10 +242,10 @@ class SpriteInfo extends React.Component {
                 {
                     !this.props.isStage && <>
                         <h3 className={classNames(styles.title)}>组件</h3>
-                        <AddComponentBtn/>
-                        <ComponentAttribute/>
+                        <AddComponentBtn />
+                        <ComponentAttribute />
                         <h3 className={classNames(styles.title)}>组件树</h3>
-                        <PrototypeChain/>
+                        <PrototypeChain />
                     </>
                 }
             </Box>

@@ -9,7 +9,7 @@
     color: $text-primary;
 
     border-left: 1px solid $ui-black-transparent;
-    min-width: 20rem;
+    width: 15rem;
     overflow: auto;
 }
 .ml {

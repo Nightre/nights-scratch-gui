@@ -15,9 +15,11 @@ const ComponentAttribute = ({ editingTargetId, vm, spritesState }) => { // éœ€è¦
 
     const handleDelete = (index) => {
         target.removeComponet(index)
+        vm.emitWorkspaceUpdate()
     }
     const handleShow = (index) => {
         target.toggleShowComponents(index)
+        vm.emitWorkspaceUpdate()
     }
     if (!target) return <></>
 

@@ -3,16 +3,19 @@
 .card {
     width: 100%;
     min-height: 2rem;
-    border-radius: 0.5rem;
-    padding: 0.5rem;
-    background-color: white;
+    border-radius: 0.25rem;
+    padding: 0.3rem;
+
+    background: $ui-white;
+    color: $text-primary;
+
     border: 1px solid $ui-black-transparent;
 }
 
 .close {
     float: right;
-    width: 2rem;
-    height: 2rem;
+    width: 1.5rem;
+    height: 1.5rem;
     font-size: 1rem;
     margin-left: 0.5rem;
 
@@ -28,20 +31,15 @@
 }
 
 .close img {
-    height: 1.3rem;
-    width: 1.3rem;
+    height: 0.8rem;
+    width: 0.8rem;
 }
-
-.card hr {
-    margin: 2px 0px;
-}
-
 .card p {
     margin: 0;
 }
 
 .title {
-    font-size: 1.3rem;
+    font-size: 1rem;
 }
 
 .col {

@@ -64,6 +64,7 @@ const PromptComponent = props => (
                 {props.label}
             </Box>
             <Box>
+               
                 <input
                     autoFocus
                     className={styles.variableNameTextInput}
@@ -73,6 +74,7 @@ const PromptComponent = props => (
                     onFocus={props.onFocus}
                     onKeyPress={props.onKeyPress}
                 />
+        
             </Box>
             {props.showVariableOptions ?
                 <div>
@@ -176,7 +178,7 @@ const PromptComponent = props => (
                     )}
                 </Box>
             )}
-
+            {props.showListMessage && <p className={styles.label}>❌列表已弃用！无法存储高级数据结构，请使用变量代替</p>}
             <Box className={styles.buttonRow}>
                 <button
                     className={styles.cancelButton}
