@@ -303,6 +303,7 @@ const WarpTimer = props => (
 const DisableCompiler = props => (
     <BooleanSetting
         {...props}
+        disabled
         label={
             <FormattedMessage
                 defaultMessage="Disable Compiler"
@@ -483,22 +484,15 @@ const SettingsModalComponent = props => (
                 value={props.removeLimits}
                 onChange={props.onRemoveLimitsChange}
             />
-            <Header>
-                <FormattedMessage
-                    defaultMessage="Danger Zone"
-                    description="Settings modal section"
-                    id="tw.settingsModal.dangerZone"
-                />
-            </Header>
             {!props.isEmbedded && (
                 <CustomStageSize
                     {...props}
                 />
             )}
-            <DisableCompiler
+            {/* <DisableCompiler
                 value={props.disableCompiler}
                 onChange={props.onDisableCompilerChange}
-            />
+            /> */}
             {!props.isEmbedded && (
                 <StoreProjectOptions
                     {...props}
