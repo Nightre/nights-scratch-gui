@@ -230,6 +230,7 @@ class Blocks extends React.Component {
         }
 
         gentlyRequestPersistentStorage();
+        this.handleEnableProcedureReturns();
     }
     shouldComponentUpdate(nextProps, nextState) {
         return (

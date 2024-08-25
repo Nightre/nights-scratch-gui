@@ -412,7 +412,6 @@ const modifyBlockly = (Blockly, vm) => {
 
         var newExtraState = Blockly.Xml.domToText(this.mutationToDom(this));
 
-        console.log("mutation", oldExtraState, newExtraState, oldExtraState !== newExtraState)
         if (oldExtraState !== newExtraState) {
             Blockly.Events.fire(
                 new Blockly.Events.BlockChange(
@@ -463,6 +462,9 @@ const modifyBlockly = (Blockly, vm) => {
                 return false;
             }
             if (this.sourceBlock_.isInFlyout) {
+                return false;
+            }
+            if (this.sourceBlock_.inherited) {
                 return false;
             }
             this.onclick(e)
@@ -540,7 +542,7 @@ const modifyBlockly = (Blockly, vm) => {
     Blockly.Blocks['control_call'] = {
         init: function () {
             this.jsonInit({
-                "message0": "运行 %1 参数 (",
+                "message0": "调用 %1 参数 (",
                 "args0": [
                     {
                         "type": "input_value",
@@ -592,6 +594,38 @@ const modifyBlockly = (Blockly, vm) => {
             this.newSize = parseInt(xmlElement.getAttribute('size'), 0);
             this.updateShape()
         },
+    }
+    const controlCall = Blockly.Blocks['control_call']
+    Blockly.Blocks['control_call_return'] = {
+        init: function () {
+            this.jsonInit({
+                "message0": "调用 %1 参数 (",
+                "args0": [
+                    {
+                        "type": "input_value",
+                        "name": "FUNCTION",
+                    },
+                ],
+                "category": Blockly.Categories.control,
+                "extensions": ["colours_control", "output_string"]
+            });
+            this.size = 0
+            this.appendDummyInput("PLUSMINUS")
+                .appendField(')')
+                .appendField(new Blockly.extensible.PlusButton(() => {
+                    this.newSize = this.size + 1;
+                    this.updateShape()
+                }))
+                .appendField(new Blockly.extensible.MinusButton(() => {
+                    this.newSize = Math.max(0, this.size - 1);
+                    this.updateShape();
+                }))
+        },
+        attachTextShadow_: Blockly.extensible.attachTextShadow_,
+        updateShape: Blockly.extensible.updateShape,
+        updateInput: controlCall.updateInput,
+        mutationToDom: controlCall.mutationToDom,
+        domToMutation: controlCall.domToMutation,
     }
 
     Blockly.Blocks["structures_self"] = {
@@ -942,7 +976,7 @@ const modifyBlockly = (Blockly, vm) => {
     Blockly.Blocks['structures_slice_list'] = {
         init: function () {
             this.jsonInit({
-                "message0": "截取列表 %1 从第 %2 项到 %3 项",
+                "message0": "截取 %1 从第 %2 项到 %3 项",
                 "args0": [
                     {
                         "type": "input_value",
@@ -1041,6 +1075,62 @@ const modifyBlockly = (Blockly, vm) => {
         Blockly.DropDownDiv.content_.style.width = '';
     };
 
+    Blockly.Blocks['sensing_touching_targets'] = {
+        init: function () {
+            this.jsonInit({
+                "message0": "碰到的角色列表",
+                "extensions": ["colours_sensing", "output_string"]
+            });
+        }
+    };
+    Blockly.Blocks['sensing_on_target_entered'] = {
+        init: function () {
+            this.jsonInit({
+                "message0": "当 %1 进入碰撞",
+                "extensions": ["colours_sensing", "shape_hat"],
+                "args0": [
+                    {
+                        "type": "input_value",
+                        "name": "OBJECT"
+                    },
+                ]
+            });
+        }
+    };
+    Blockly.Blocks['sensing_on_target_exited'] = {
+        init: function () {
+            this.jsonInit({
+                "message0": "当 %1 离开碰撞",
+                "extensions": ["colours_sensing", "shape_hat"],
+                "args0": [
+                    {
+                        "type": "input_value",
+                        "name": "OBJECT"
+                    },
+                ]
+            });
+        }
+    };
+    // hat_parameters
+    Blockly.Blocks['hat_parameters'] = {
+        init: function () {
+            this.jsonInit({
+                "message0": " %1",
+                "args0": [
+                    {
+                        "type": "field_label_serializable",
+                        "name": "VALUE",
+                        "text": "asdasdasd"
+                    }
+                ],
+                "extensions": ["colours_more", "output_number", "output_string"]
+            });
+        }
+    };
+    Blockly.scratchBlocksUtils.isShadowArgumentReporter = function (block) {
+        return (block.isShadow() && (block.type == 'argument_reporter_boolean' ||
+            block.type == 'argument_reporter_string_number' || block.type == 'hat_parameters'));
+    };
 
     return Blockly
 }

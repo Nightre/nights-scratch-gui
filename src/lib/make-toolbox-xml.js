@@ -449,13 +449,26 @@ const control = function (isInitialSetup, isStage, targetId, colors) {
                     </shadow>
                 </value>
             </block>
+            <block type="control_call_return">
+                <value name="FUNCTION">
+                    <shadow type="text">
+                        <field name="TEXT"></field>
+                    </shadow>
+                </value>
+            </block>
             <block type="control_delete_this_clone"/>
         `}
         ${categorySeparator}
     </category>
     `;
 };
-
+/* <block type="control_call_return">
+<value name="FUNCTION">
+    <shadow type="text">
+        <field name="TEXT"></field>
+    </shadow>
+</value>
+</block> */
 const sensing = function (isInitialSetup, isStage, targetId, colors) {
     const name = translate('SENSING_ASK_TEXT', 'What\'s your name?');
     // Note: the category's secondaryColour matches up with the blocks' tertiary color, both used for border color.
@@ -532,9 +545,25 @@ const sensing = function (isInitialSetup, isStage, targetId, colors) {
         ${blockSeparator}
         <block type="sensing_username"/>
         ${categorySeparator}
+        <block type="sensing_touching_targets" />
     </category>
     `;
 };
+
+/* <block type="sensing_on_target_entered">
+<value name="OBJECT">
+    <shadow type="hat_parameters">
+        <field name="VALUE">target</field>
+    </shadow>
+</value>
+</block>
+<block type="sensing_on_target_exited">
+<value name="OBJECT">
+    <shadow type="hat_parameters">
+        <field name="VALUE">target</field>
+    </shadow>
+</value>
+</block> */
 
 const operators = function (isInitialSetup, isStage, targetId, colors) {
     const apple = translate('OPERATORS_JOIN_APPLE', 'apple');

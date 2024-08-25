@@ -94,7 +94,7 @@
     "scratch-audio": "github:TurboWarp/scratch-audio#develop",
     "scratch-blocks": "github:nightre/scratch-blocks#develop",
     "scratch-paint": "github:TurboWarp/scratch-paint#develop",
-    "scratch-render": "github:TurboWarp/scratch-render#develop",
+    "scratch-render": "github:nightre/scratch-render#develop",
     "scratch-vm": "github:nightre/scratch-vm#develop",
     "socket.io-client": "^4.7.5",
     "style-loader": "^0.23.0",

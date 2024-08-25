@@ -13,16 +13,15 @@ const SelectComponent = ({ spritesState, onChange, editingTarget: editingTargetI
 
         setSelectedValue('');
     };
-    console.log(spritesState)
     return (
         <div>
             <select disabled={Object.values(spritesState).length <= 1} className={styles.select} value={selectedValue} onChange={handleChange}>
                 <option value="" disabled hidden>
                     添加组件
                 </option>
-                {Object.values(spritesState).map((data, index) => (
+                {Object.values(spritesState).map((data) => (
                     data.id !== editingTargetId && (
-                        <option value={data.id} key={index}>
+                        <option value={data.id} key={data.id}>
                             {data.name}
                         </option>
                     )
