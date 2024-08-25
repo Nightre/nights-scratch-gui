@@ -17,10 +17,10 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {connect} from 'react-redux';
-import {compose} from 'redux';
-import {FormattedMessage, defineMessages, injectIntl, intlShape} from 'react-intl';
-import {getIsLoading} from '../reducers/project-state.js';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { FormattedMessage, defineMessages, injectIntl, intlShape } from 'react-intl';
+import { getIsLoading } from '../reducers/project-state.js';
 import DOMElementRenderer from '../containers/dom-element-renderer.jsx';
 import AppStateHOC from '../lib/app-state-hoc.jsx';
 import ErrorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
@@ -37,12 +37,12 @@ import FeaturedProjects from '../components/tw-featured-projects/featured-projec
 import Description from '../components/tw-description/description.jsx';
 import BrowserModal from '../components/browser-modal/browser-modal.jsx';
 import CloudVariableBadge from '../containers/tw-cloud-variable-badge.jsx';
-import {isBrowserSupported} from '../lib/tw-environment-support-prober';
+import { isBrowserSupported } from '../lib/tw-environment-support-prober';
 import AddonChannels from '../addons/channels';
-import {loadServiceWorker} from './load-service-worker';
+import { loadServiceWorker } from './load-service-worker';
 import runAddons from '../addons/entry';
 import InvalidEmbed from '../components/tw-invalid-embed/invalid-embed.jsx';
-import {APP_NAME} from '../lib/brand.js';
+import { APP_NAME } from '../lib/brand.js';
 
 import styles from './interface.css';
 
@@ -193,23 +193,23 @@ const Footer = () => (
 );
 
 class Interface extends React.Component {
-    constructor (props) {
+    constructor(props) {
         super(props);
         this.handleUpdateProjectTitle = this.handleUpdateProjectTitle.bind(this);
     }
-    componentDidUpdate (prevProps) {
+    componentDidUpdate(prevProps) {
         if (prevProps.isLoading && !this.props.isLoading) {
             loadServiceWorker();
         }
     }
-    handleUpdateProjectTitle (title, isDefault) {
+    handleUpdateProjectTitle(title, isDefault) {
         if (isDefault || !title) {
             document.title = `${APP_NAME} - ${this.props.intl.formatMessage(messages.defaultTitle)}`;
         } else {
             document.title = `${title} - ${APP_NAME}`;
         }
     }
-    render () {
+    render() {
         if (isInvalidEmbed) {
             return <InvalidEmbed />;
         }
@@ -262,7 +262,12 @@ class Interface extends React.Component {
                         backpackHost="_local_"
                         {...props}
                     />
-                    {isHomepage && <h2>Nightscrach Editor 0.1</h2>}
+                    {isHomepage && 
+                        <>
+                            <h2>Nightscrach Editor 0.1 蝾螈池特有编辑器Beta版本</h2>
+                            <a href="https://github.com/Nightre/scratch-gui">https://github.com/Nightre/scratch-gui</a>
+                        </>
+                    }
                 </div>
             </div>
         );
