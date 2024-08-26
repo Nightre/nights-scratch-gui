@@ -43,7 +43,7 @@ import { loadServiceWorker } from './load-service-worker';
 import runAddons from '../addons/entry';
 import InvalidEmbed from '../components/tw-invalid-embed/invalid-embed.jsx';
 import { APP_NAME } from '../lib/brand.js';
-
+import Tutorial from "./tutorial.jsx"
 import styles from './interface.css';
 
 const isInvalidEmbed = window.parent !== window;
@@ -267,6 +267,7 @@ class Interface extends React.Component {
                             <h2>Nightscrach Editor 0.1 蝾螈池特有编辑器Beta版本</h2>
                             <a href="https://github.com/Nightre/scratch-gui">https://github.com/Nightre/scratch-gui</a>
                             <p>该页面仅为预览版，当编辑器变得成熟，将会代替蝾螈池默认编辑器</p>
+                            <Tutorial/>
                         </>
                     }
                 </div>

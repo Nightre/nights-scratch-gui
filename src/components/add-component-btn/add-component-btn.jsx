@@ -17,7 +17,7 @@ const SelectComponent = ({ spritesState, onChange, editingTarget: editingTargetI
         <div>
             <select disabled={Object.values(spritesState).length <= 1} className={styles.select} value={selectedValue} onChange={handleChange}>
                 <option value="" disabled hidden>
-                    添加组件
+                    添加继承
                 </option>
                 {Object.values(spritesState).map((data) => (
                     data.id !== editingTargetId && (

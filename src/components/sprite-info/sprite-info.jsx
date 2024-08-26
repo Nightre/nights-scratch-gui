@@ -241,10 +241,10 @@ class SpriteInfo extends React.Component {
                 </div>
                 {
                     !this.props.isStage && <>
-                        <h3 className={classNames(styles.title)}>组件</h3>
+                        <h3 className={classNames(styles.title)}>继承</h3>
                         <AddComponentBtn />
                         <ComponentAttribute />
-                        <h3 className={classNames(styles.title)}>组件树</h3>
+                        <h3 className={classNames(styles.title)}>继承树</h3>
                         <PrototypeChain />
                     </>
                 }
