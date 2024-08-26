@@ -21,7 +21,7 @@ const Tutorial = ()=>{
         <p>添加的父角色可以在右侧面板查看, 左侧按钮删除继承,右侧按钮隐藏继承积木</p>
         <img src={Ecard}/>
         <h4>2.数据结构</h4>
-        <p>Nightscratch 支持三种数据 <code>列表(List)</code>, <code>字典(Map)</code>,<code>函数(见克隆体管理章节)</code>, 字典仅支持用字符串作为键. 按下下图的按钮切换积木的横竖</p>
+        <p>Nightscratch 有三种新数据 <code>列表(List)</code>, <code>字典(Map)</code>,<code>函数(见克隆体管理章节)</code>, 字典仅支持用字符串作为键. 按下下图的按钮切换积木的横竖</p>
         <img src={Dchange}/>
         <p>在变量监视器,或者积木返回框都可以查看</p>
         <img src={Dshow}/>
