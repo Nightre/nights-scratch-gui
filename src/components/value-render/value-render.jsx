@@ -17,7 +17,7 @@ const ValueList = ({ value }) => {
             open ? value.map((subValue, index) =>
                 <div key={index} className={styles.objectRow}>
                     <ValueRender value={subValue} />
-                    <p className={classNames(styles.text, styles.key)}>,</p>
+                    {index !== (value.length - 1) && <p className={classNames(styles.text, styles.key)}>,</p>}
                 </div>
             ) : <button onClick={() => setOpen(true)} >...</button>
         }

@@ -32,7 +32,6 @@ const CustomAttributes = ({ editingTarget, vm }) => {
     }
     const handleChange = (key, event) => {
         const newValue = event.target.value;
-        console.log("更新", newValue)
         target.setAtribute(key, newValue);
     }
     const handleDelete = (key) => {

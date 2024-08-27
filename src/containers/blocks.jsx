@@ -514,6 +514,7 @@ class Blocks extends React.Component {
         // fresh workspace and we don't want any changes made to another sprites
         // workspace to be 'undone' here.
         this.workspace.clearUndo();
+        this.workspace.toolbox_.refreshSelection()
     }
     handleMonitorsUpdate(monitors) {
         // Update the checkboxes of the relevant monitors.
@@ -820,7 +821,7 @@ const mapStateToProps = state => ({
     toolboxXML: state.scratchGui.toolbox.toolboxXML,
     customProceduresVisible: state.scratchGui.customProcedures.active,
     workspaceMetrics: state.scratchGui.workspaceMetrics,
-    useCatBlocks: isTimeTravel2020(state)
+    useCatBlocks: isTimeTravel2020(state),
 });
 
 const mapDispatchToProps = dispatch => ({

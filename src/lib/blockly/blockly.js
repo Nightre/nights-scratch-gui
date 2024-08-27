@@ -996,7 +996,44 @@ const modifyBlockly = (Blockly, vm) => {
             });
         }
     }
-
+    Blockly.Blocks['structures_append_list'] = {
+        init: function () {
+            this.jsonInit({
+                "message0": "追加 %1 到列表 %2",
+                "args0": [
+                    {
+                        "type": "input_value",
+                        "name": "VALUE"
+                    },
+                    {
+                        "type": "input_value",
+                        "name": "OBJECT"
+                    },
+                ],
+                "category": Blockly.Categories.motion,
+                "extensions": ["colours_motion", "shape_statement"]
+            });
+        }
+    }
+    Blockly.Blocks['structures_indexof_list'] = {
+        init: function () {
+            this.jsonInit({
+                "message0": "列表 %1 第一个 %2 的编号",
+                "args0": [
+                    {
+                        "type": "input_value",
+                        "name": "OBJECT"
+                    },
+                    {
+                        "type": "input_value",
+                        "name": "VALUE"
+                    },
+                ],
+                "category": Blockly.Categories.motion,
+                "extensions": ["colours_motion", "output_string"]
+            });
+        }
+    }
     // JSON
 
     Blockly.Blocks['structures_delete_map'] = {
@@ -1130,6 +1167,33 @@ const modifyBlockly = (Blockly, vm) => {
     Blockly.scratchBlocksUtils.isShadowArgumentReporter = function (block) {
         return (block.isShadow() && (block.type == 'argument_reporter_boolean' ||
             block.type == 'argument_reporter_string_number' || block.type == 'hat_parameters'));
+    };
+
+    Blockly.BlockSvg.prototype.showContextMenu_ = function (e) {
+        if (this.workspace.options.readOnly || !this.contextMenu || this.inherited) {
+            return;
+        }
+        // Save the current block in a variable for use in closures.
+        var block = this;
+        var menuOptions = [];
+        if (this.isDeletable() && this.isMovable() && !block.isInFlyout) {
+            menuOptions.push(
+                Blockly.ContextMenu.blockDuplicateOption(block, e));
+            if (this.isEditable() && this.workspace.options.comments) {
+                menuOptions.push(Blockly.ContextMenu.blockCommentOption(block));
+            }
+            menuOptions.push(Blockly.ContextMenu.blockDeleteOption(block));
+        } else if (this.parentBlock_ && this.isShadow_) {
+            this.parentBlock_.showContextMenu_(e);
+            return;
+        }
+
+        // Allow the block to add or modify menuOptions.
+        if (this.customContextMenu) {
+            this.customContextMenu(menuOptions);
+        }
+        Blockly.ContextMenu.show(e, menuOptions, this.RTL);
+        Blockly.ContextMenu.currentBlock = this;
     };
 
     return Blockly

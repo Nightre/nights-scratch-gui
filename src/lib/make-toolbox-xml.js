@@ -869,6 +869,19 @@ const structures = function (isInitialSetup, isStage, targetId, colors) {
             </value>
         </block>
 
+        <block type="structures_append_list">
+            <value name="OBJECT">
+                <shadow type="text">
+                    <field name="TEXT"></field>
+                </shadow>
+            </value>
+            <value name="VALUE">
+                <shadow type="text">
+                    <field name="TEXT">value</field>
+                </shadow>
+            </value>
+        </block>
+
         <block type="structures_get_list_length">
             <value name="OBJECT">
                 <shadow type="text">
@@ -890,7 +903,18 @@ const structures = function (isInitialSetup, isStage, targetId, colors) {
                 </shadow>
             </value>
         </block>
-
+        <block type="structures_indexof_list">
+            <value name="OBJECT">
+                <shadow type="text">
+                    <field name="TEXT"></field>
+                </shadow>
+            </value>
+            <value name="VALUE">
+                <shadow type="text">
+                    <field name="TEXT">value</field>
+                </shadow>
+            </value>
+        </block>
         <block type="structures_slice_list">
             <value name="OBJECT">
                 <shadow type="text">
@@ -908,6 +932,7 @@ const structures = function (isInitialSetup, isStage, targetId, colors) {
                 </shadow>
             </value>
         </block>
+
         ${blockSeparator}
         <block type="structures_delete_map">
             <value name="OBJECT">
