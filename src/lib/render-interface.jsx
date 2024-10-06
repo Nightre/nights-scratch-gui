@@ -75,7 +75,6 @@ class Interface extends React.Component {
                 backpackHost="_local_"
 
                 {...this.props}
-                onClickAddonSettings={handleClickAddonSettings}
             />
         );
     }
@@ -85,7 +84,6 @@ const WrappedInterface = compose(
     AppStateHOC,
     ErrorBoundaryHOC('TW Interface'),
     ProjectFetcherHOC,
-    TWStateManagerHOC,
     TWPackagerIntegrationHOC
 )(Interface);
 

@@ -24,8 +24,6 @@ import { getIsLoading } from '../reducers/project-state.js';
 import DOMElementRenderer from '../containers/dom-element-renderer.jsx';
 import AppStateHOC from '../lib/app-state-hoc.jsx';
 import ErrorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
-import TWProjectMetaFetcherHOC from '../lib/tw-project-meta-fetcher-hoc.jsx';
-import TWStateManagerHOC from '../lib/tw-state-manager-hoc.jsx';
 import SBFileUploaderHOC from '../lib/sb-file-uploader-hoc.jsx';
 import TWPackagerIntegrationHOC from '../lib/tw-packager-integration-hoc.jsx';
 import SettingsStore from '../addons/settings-store-singleton';
@@ -45,7 +43,7 @@ import InvalidEmbed from '../components/tw-invalid-embed/invalid-embed.jsx';
 import { APP_NAME } from '../lib/brand.js';
 import Tutorial from "./tutorial.jsx"
 import styles from './interface.css';
-
+import ProjectFetcherHOC from "../lib/project-fetcher-hoc.jsx"
 const isInvalidEmbed = window.parent !== window;
 
 const handleClickAddonSettings = addonId => {
@@ -261,6 +259,12 @@ class Interface extends React.Component {
                         backpackVisible
                         backpackHost="_local_"
                         {...props}
+                        projectToken="asdsd"
+                        projectId={80}
+
+                        basePath={"/scratch-gui/dist/"}
+                        projectHost={"https://asdasd.com//get_project"}
+                        assetHost={"https://asdasd.com/project_assets"}
                     />
                     {isHomepage && 
                         <>
@@ -314,9 +318,8 @@ const ConnectedInterface = injectIntl(connect(
 
 const WrappedInterface = compose(
     AppStateHOC,
+    ProjectFetcherHOC,
     ErrorBoundaryHOC('TW Interface'),
-    TWProjectMetaFetcherHOC,
-    TWStateManagerHOC,
     TWPackagerIntegrationHOC
 )(ConnectedInterface);
 

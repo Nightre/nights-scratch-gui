@@ -255,7 +255,7 @@ module.exports = [
                 'scratch-gui': './src/index.js'
             },
             output: {
-                libraryTarget: 'umd',
+                libraryTarget: 'window',
                 filename: 'js/[name].js',
                 chunkFilename: 'js/[name].js',
                 path: path.resolve('dist'),

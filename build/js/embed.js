@@ -204,7 +204,7 @@ var GUI =
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
+/******/ 	__webpack_require__.p = "/scratch-gui/dist/";
 /******/
 /******/ 	// on error function for async loading
 /******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
@@ -12408,7 +12408,7 @@ class MenuBar extends react__WEBPACK_IMPORTED_MODULE_7___default.a.Component {
       className: _menu_bar_css__WEBPACK_IMPORTED_MODULE_39___default.a.menuBarItem
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("a", {
       className: _menu_bar_css__WEBPACK_IMPORTED_MODULE_39___default.a.feedbackLink,
-      href: "https://axolotlpool.cfd/user/2",
+      href: "https://axopl.com/user/2",
       rel: "noopener noreferrer",
       target: "_blank"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_button_button_jsx__WEBPACK_IMPORTED_MODULE_10__["default"], {
@@ -12597,7 +12597,7 @@ const mapDispatchToProps = dispatch => ({
   onClickRemix: () => dispatch(Object(_reducers_project_state__WEBPACK_IMPORTED_MODULE_35__["remixProject"])()),
   onClickSave: () => dispatch(Object(_reducers_project_state__WEBPACK_IMPORTED_MODULE_35__["manualUpdateProject"])()),
   onClickSaveAsCopy: () => dispatch(Object(_reducers_project_state__WEBPACK_IMPORTED_MODULE_35__["saveProjectAsCopy"])()),
-  onSeeCommunity: () => dispatch(Object(_reducers_mode__WEBPACK_IMPORTED_MODULE_33__["setPlayer"])(true)),
+  //onSeeCommunity: () => dispatch(setPlayer(true)),
   onSetTimeTravelMode: mode => dispatch(Object(_reducers_time_travel__WEBPACK_IMPORTED_MODULE_34__["setTimeTravel"])(mode))
 });
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_2__["compose"])(react_intl__WEBPACK_IMPORTED_MODULE_3__["injectIntl"], _containers_menu_bar_hoc_jsx__WEBPACK_IMPORTED_MODULE_25__["default"], Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps))(MenuBar));
@@ -26666,7 +26666,7 @@ const fetchLibrary = async () => {
     }),
     docsURI: extension.docs ? "https://extensions.turbowarp.org/".concat(extension.slug) : null,
     samples: extension.samples ? extension.samples.map(sample => ({
-      href: "".concat("", "editor?project_url=https://extensions.turbowarp.org/samples/").concat(encodeURIComponent(sample), ".sb3"),
+      href: "".concat("/scratch-gui/dist/", "editor?project_url=https://extensions.turbowarp.org/samples/").concat(encodeURIComponent(sample), ".sb3"),
       text: sample
     })) : null,
     incompatibleWithScratch: true,
@@ -44309,7 +44309,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _reducers_project_state__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../reducers/project-state */ "./src/reducers/project-state.js");
 
 const setProjectId = (dispatch, projectId) => {
-  if (false) {}
+  if (true) {
+    if (projectId === '0') {
+      projectId = '';
+    }
+    location.href = "".concat("/scratch-gui/dist/").concat(projectId);
+    return;
+  }
   dispatch(Object(_reducers_project_state__WEBPACK_IMPORTED_MODULE_0__["setProjectId"])(projectId));
 };
 const searchParamsToString = params => {
@@ -46248,7 +46254,7 @@ const getCanonicalLinkElement = () => {
 class WildcardRouter extends Router {
   constructor(callbacks) {
     super(callbacks);
-    this.root = "";
+    this.root = "/scratch-gui/dist/";
   }
   onhashchange() {
     const hashProjectId = readHashProjectId();
@@ -46342,7 +46348,9 @@ const createRouter = (style, callbacks) => {
   }
 
   // WildcardRouter is not supported if ROOT is not set.
-  if (false) {}
+  if (true) {
+    supportedStyles.push('wildcard');
+  }
   if (!supportedStyles.includes(style)) {
     _log__WEBPACK_IMPORTED_MODULE_5__["default"].warn("routing style is unknown or not supported: ".concat(style, ", falling back to hash"));
     style = 'hash';
@@ -46614,7 +46622,7 @@ const TWStateManager = function TWStateManager(WrappedComponent) {
     vm: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.instanceOf(scratch_vm__WEBPACK_IMPORTED_MODULE_4___default.a)
   };
   StateManagerComponent.defaultProps = {
-    routingStyle: "filehash"
+    routingStyle: "wildcard"
   };
   const mapStateToProps = state => ({
     customStageSize: state.scratchGui.customStageSize,
@@ -47759,7 +47767,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 /* eslint-disable */
-if (false) {}
+if (true) {
+  __webpack_require__.p = "/scratch-gui/dist/";
+}
 
 /***/ }),
 
@@ -47785,7 +47795,7 @@ const RenderGUI = props => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___defau
   canUseCloud: true,
   hasCloudPermission: true,
   canSave: false,
-  basePath: "",
+  basePath: "/scratch-gui/dist/",
   canEditTitle: true,
   enableCommunity: true
 }, props));

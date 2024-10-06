@@ -204,7 +204,7 @@ var GUI =
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
+/******/ 	__webpack_require__.p = "/scratch-gui/dist/";
 /******/
 /******/ 	// on error function for async loading
 /******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
@@ -13581,7 +13581,7 @@ class MenuBar extends react__WEBPACK_IMPORTED_MODULE_7___default.a.Component {
       className: _menu_bar_css__WEBPACK_IMPORTED_MODULE_39___default.a.menuBarItem
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("a", {
       className: _menu_bar_css__WEBPACK_IMPORTED_MODULE_39___default.a.feedbackLink,
-      href: "https://axolotlpool.cfd/user/2",
+      href: "https://axopl.com/user/2",
       rel: "noopener noreferrer",
       target: "_blank"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_button_button_jsx__WEBPACK_IMPORTED_MODULE_10__["default"], {
@@ -13770,7 +13770,7 @@ const mapDispatchToProps = dispatch => ({
   onClickRemix: () => dispatch(Object(_reducers_project_state__WEBPACK_IMPORTED_MODULE_35__["remixProject"])()),
   onClickSave: () => dispatch(Object(_reducers_project_state__WEBPACK_IMPORTED_MODULE_35__["manualUpdateProject"])()),
   onClickSaveAsCopy: () => dispatch(Object(_reducers_project_state__WEBPACK_IMPORTED_MODULE_35__["saveProjectAsCopy"])()),
-  onSeeCommunity: () => dispatch(Object(_reducers_mode__WEBPACK_IMPORTED_MODULE_33__["setPlayer"])(true)),
+  //onSeeCommunity: () => dispatch(setPlayer(true)),
   onSetTimeTravelMode: mode => dispatch(Object(_reducers_time_travel__WEBPACK_IMPORTED_MODULE_34__["setTimeTravel"])(mode))
 });
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_2__["compose"])(react_intl__WEBPACK_IMPORTED_MODULE_3__["injectIntl"], _containers_menu_bar_hoc_jsx__WEBPACK_IMPORTED_MODULE_25__["default"], Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps))(MenuBar));
@@ -28981,7 +28981,7 @@ const fetchLibrary = async () => {
     }),
     docsURI: extension.docs ? "https://extensions.turbowarp.org/".concat(extension.slug) : null,
     samples: extension.samples ? extension.samples.map(sample => ({
-      href: "".concat("", "editor?project_url=https://extensions.turbowarp.org/samples/").concat(encodeURIComponent(sample), ".sb3"),
+      href: "".concat("/scratch-gui/dist/", "editor?project_url=https://extensions.turbowarp.org/samples/").concat(encodeURIComponent(sample), ".sb3"),
       text: sample
     })) : null,
     incompatibleWithScratch: true,
@@ -46626,7 +46626,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _reducers_project_state__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../reducers/project-state */ "./src/reducers/project-state.js");
 
 const setProjectId = (dispatch, projectId) => {
-  if (false) {}
+  if (true) {
+    if (projectId === '0') {
+      projectId = '';
+    }
+    location.href = "".concat("/scratch-gui/dist/").concat(projectId);
+    return;
+  }
   dispatch(Object(_reducers_project_state__WEBPACK_IMPORTED_MODULE_0__["setProjectId"])(projectId));
 };
 const searchParamsToString = params => {
@@ -48679,7 +48685,7 @@ const getCanonicalLinkElement = () => {
 class WildcardRouter extends Router {
   constructor(callbacks) {
     super(callbacks);
-    this.root = "";
+    this.root = "/scratch-gui/dist/";
   }
   onhashchange() {
     const hashProjectId = readHashProjectId();
@@ -48773,7 +48779,9 @@ const createRouter = (style, callbacks) => {
   }
 
   // WildcardRouter is not supported if ROOT is not set.
-  if (false) {}
+  if (true) {
+    supportedStyles.push('wildcard');
+  }
   if (!supportedStyles.includes(style)) {
     _log__WEBPACK_IMPORTED_MODULE_5__["default"].warn("routing style is unknown or not supported: ".concat(style, ", falling back to hash"));
     style = 'hash';
@@ -49045,7 +49053,7 @@ const TWStateManager = function TWStateManager(WrappedComponent) {
     vm: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.instanceOf(scratch_vm__WEBPACK_IMPORTED_MODULE_4___default.a)
   };
   StateManagerComponent.defaultProps = {
-    routingStyle: "filehash"
+    routingStyle: "wildcard"
   };
   const mapStateToProps = state => ({
     customStageSize: state.scratchGui.customStageSize,
@@ -50215,7 +50223,9 @@ Object(_app_target_js__WEBPACK_IMPORTED_MODULE_3__["default"])( /*#__PURE__*/rea
 /***/ (function(module, exports, __webpack_require__) {
 
 /* eslint-disable */
-if (false) {}
+if (true) {
+  __webpack_require__.p = "/scratch-gui/dist/";
+}
 
 /***/ }),
 
@@ -50241,7 +50251,7 @@ const RenderGUI = props => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___defau
   canUseCloud: true,
   hasCloudPermission: true,
   canSave: false,
-  basePath: "",
+  basePath: "/scratch-gui/dist/",
   canEditTitle: true,
   enableCommunity: true
 }, props));
@@ -50348,8 +50358,8 @@ function _objectWithoutPropertiesLoose(r, e) { if (null == r) return {}; var t =
 const isInvalidEmbed = window.parent !== window;
 const handleClickAddonSettings = addonId => {
   // addonId might be a string of the addon to focus on, undefined, or an event (treat like undefined)
-  const path =  false ? undefined : 'addons.html';
-  const url = "".concat("").concat(path).concat(typeof addonId === 'string' ? "#".concat(addonId) : '');
+  const path =  true ? 'addons' : undefined;
+  const url = "".concat("/scratch-gui/dist/").concat(path).concat(typeof addonId === 'string' ? "#".concat(addonId) : '');
   window.open(url);
 };
 const messages = Object(react_intl__WEBPACK_IMPORTED_MODULE_5__["defineMessages"])({
@@ -50511,7 +50521,9 @@ class Interface extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Component {
       onUpdateProjectTitle: this.handleUpdateProjectTitle,
       backpackVisible: true,
       backpackHost: "_local_"
-    }, props)), isHomepage && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h2", null, "Nightscrach Editor 0.1 \u877E\u8788\u6C60\u7279\u6709\u7F16\u8F91\u5668Beta\u7248\u672C"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
+    }, props, {
+      projectId: 0
+    })), isHomepage && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h2", null, "Nightscrach Editor 0.1 \u877E\u8788\u6C60\u7279\u6709\u7F16\u8F91\u5668Beta\u7248\u672C"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
       href: "https://github.com/Nightre/scratch-gui"
     }, "https://github.com/Nightre/scratch-gui"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("p", null, "\u8BE5\u9875\u9762\u4EC5\u4E3A\u9884\u89C8\u7248\uFF0C\u5F53\u7F16\u8F91\u5668\u53D8\u5F97\u6210\u719F\uFF0C\u5C06\u4F1A\u4EE3\u66FF\u877E\u8788\u6C60\u9ED8\u8BA4\u7F16\u8F91\u5668"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_tutorial_jsx__WEBPACK_IMPORTED_MODULE_29__["default"], null))));
   }
@@ -50545,7 +50557,7 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = () => ({});
 const ConnectedInterface = Object(react_intl__WEBPACK_IMPORTED_MODULE_5__["injectIntl"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, mapDispatchToProps)(Interface));
-const WrappedInterface = Object(redux__WEBPACK_IMPORTED_MODULE_4__["compose"])(_lib_app_state_hoc_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], Object(_lib_error_boundary_hoc_jsx__WEBPACK_IMPORTED_MODULE_9__["default"])('TW Interface'), _lib_tw_project_meta_fetcher_hoc_jsx__WEBPACK_IMPORTED_MODULE_10__["default"], _lib_tw_state_manager_hoc_jsx__WEBPACK_IMPORTED_MODULE_11__["default"], _lib_tw_packager_integration_hoc_jsx__WEBPACK_IMPORTED_MODULE_13__["default"])(ConnectedInterface);
+const WrappedInterface = Object(redux__WEBPACK_IMPORTED_MODULE_4__["compose"])(_lib_app_state_hoc_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], Object(_lib_error_boundary_hoc_jsx__WEBPACK_IMPORTED_MODULE_9__["default"])('TW Interface'), _lib_tw_project_meta_fetcher_hoc_jsx__WEBPACK_IMPORTED_MODULE_10__["default"], _lib_tw_packager_integration_hoc_jsx__WEBPACK_IMPORTED_MODULE_13__["default"])(ConnectedInterface);
 /* harmony default export */ __webpack_exports__["default"] = (WrappedInterface);
 
 /***/ }),

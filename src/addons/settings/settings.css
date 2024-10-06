@@ -17,18 +17,18 @@
 @import "../../css/colors.css";
 @import "../../css/filters.css";
 
-body {
+.setting-box {
     background-color: $page-background;
     color: $page-foreground;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin: 0;
 }
 
-a[href] {
+.setting-box a[href] {
     color: $link-color;
     text-decoration: underline;
 }
-a:active, a:focus {
+.setting-box  a:active, .setting-box a:focus {
     outline: none;
     box-shadow: 0 0 0 3px $looks-transparent;
 }

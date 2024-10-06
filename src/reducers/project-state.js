@@ -465,10 +465,12 @@ const projectError = error => ({
     error: error
 });
 
-const setProjectId = id => ({
+const setProjectId = id => {
+    debugger
+    return {
     type: SET_PROJECT_ID,
     projectId: id
-});
+}};
 
 const requestNewProject = needSave => {
     if (needSave) return {type: START_UPDATING_BEFORE_CREATING_NEW};
