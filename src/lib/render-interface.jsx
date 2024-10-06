@@ -28,13 +28,6 @@ import { loadServiceWorker } from './load-service-worker.js';
 import runAddons from '../addons/entry';
 import ProjectFetcherHOC from "./project-fetcher-hoc.jsx"
 
-const handleClickAddonSettings = addonId => {
-    // addonId might be a string of the addon to focus on, undefined, or an event (treat like undefined)
-    const path = process.env.ROUTING_STYLE === 'wildcard' ? 'addons' : 'addons.html';
-    const url = `${process.env.ROOT}${path}${typeof addonId === 'string' ? `#${addonId}` : ''}`;
-    window.open(url);
-};
-
 
 if (AddonChannels.reloadChannel) {
     AddonChannels.reloadChannel.addEventListener('message', () => {
@@ -83,7 +76,7 @@ class Interface extends React.Component {
 const WrappedInterface = compose(
     AppStateHOC,
     ErrorBoundaryHOC('TW Interface'),
-    ProjectFetcherHOC,
+    TWStateManagerHOC,
     TWPackagerIntegrationHOC
 )(Interface);
 

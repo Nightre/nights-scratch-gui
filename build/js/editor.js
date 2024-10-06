@@ -304,7 +304,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "/* overridden by src/lib/themes/guiHelpers.js */\n\n.add-component-btn_select_2taP_ {\r\n    width: 100%;\r\n    height: 2rem;\r\n    border-radius: calc(0.5rem / 2);\r\n    text-align: center;\r\n    border: none;\r\n    box-shadow: 0 0 0 1px var(--ui-black-transparent);\r\n    color: var(--menu-bar-foreground);\r\n    background-color:var(--looks-secondary);\r\n}\n\n.add-component-btn_select_2taP_ option {\r\n    background: var(--ui-secondary);\r\n    color: var(--text-primary);\r\n}", ""]);
+exports.push([module.i, "/* overridden by src/lib/themes/guiHelpers.js */\n\n.add-component-btn_select_2taP_ {\n    width: 100%;\n    height: 2rem;\n    border-radius: calc(0.5rem / 2);\n    text-align: center;\n    border: none;\n    box-shadow: 0 0 0 1px var(--ui-black-transparent);\n    color: var(--menu-bar-foreground);\n    background-color:var(--looks-secondary);\n}\n\n.add-component-btn_select_2taP_ option {\n    background: var(--ui-secondary);\n    color: var(--text-primary);\n}", ""]);
 
 // exports
 exports.locals = {
@@ -773,7 +773,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "/* overridden by src/lib/themes/guiHelpers.js */\n\n.component-attribute_card_11Z1w {\r\n    width: 100%;\r\n    min-height: 2rem;\r\n    border-radius: 0.25rem;\r\n    padding: 0.3rem;\r\n\r\n    background: var(--ui-white);\r\n    color: var(--text-primary);\r\n\r\n    border: 1px solid var(--ui-black-transparent);\r\n}\n\n.component-attribute_close_-2zU0 {\r\n    float: right;\r\n    width: 1.5rem;\r\n    height: 1.5rem;\r\n    font-size: 1rem;\r\n    margin-left: 0.5rem;\r\n\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n\r\n    padding: 0;\r\n    border: none;\r\n    background-color: #f0f0f0;\r\n\r\n    border-radius: 0.5rem;\r\n}\n\n.component-attribute_close_-2zU0 img {\r\n    height: 0.8rem;\r\n    width: 0.8rem;\r\n}\n\n.component-attribute_card_11Z1w p {\r\n    margin: 0;\r\n}\n\n.component-attribute_title_3yvud {\r\n    font-size: 1rem;\r\n}\n\n.component-attribute_col_1Q56R {\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: 0.5rem;\r\n    margin-top: 0.5rem;\r\n}", ""]);
+exports.push([module.i, "/* overridden by src/lib/themes/guiHelpers.js */\n\n.component-attribute_card_11Z1w {\n    width: 100%;\n    min-height: 2rem;\n    border-radius: 0.25rem;\n    padding: 0.3rem;\n\n    background: var(--ui-white);\n    color: var(--text-primary);\n\n    border: 1px solid var(--ui-black-transparent);\n}\n\n.component-attribute_close_-2zU0 {\n    float: right;\n    width: 1.5rem;\n    height: 1.5rem;\n    font-size: 1rem;\n    margin-left: 0.5rem;\n\n    display: flex;\n    align-items: center;\n    justify-content: center;\n\n    padding: 0;\n    border: none;\n    background-color: #f0f0f0;\n\n    border-radius: 0.5rem;\n}\n\n.component-attribute_close_-2zU0 img {\n    height: 0.8rem;\n    width: 0.8rem;\n}\n\n.component-attribute_card_11Z1w p {\n    margin: 0;\n}\n\n.component-attribute_title_3yvud {\n    font-size: 1rem;\n}\n\n.component-attribute_col_1Q56R {\n    display: flex;\n    flex-direction: column;\n    gap: 0.5rem;\n    margin-top: 0.5rem;\n}", ""]);
 
 // exports
 exports.locals = {
@@ -3425,7 +3425,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".value-render_text_JOXgM {\r\n    margin: 0;\r\n    text-align: start;\r\n}\r\n\r\n.value-render_list_RYt2y {\r\n    display: flex;\r\n}\r\n\r\n.value-render_object-row_1Gi1m {\r\n    display: flex;\r\n}\r\n\r\n.value-render_key_2mCzZ {\r\n    color: rgb(97, 97, 97);\r\n}\r\n\r\n.value-render_list_RYt2y .value-render_key_2mCzZ {\r\n    margin: 0px 0.2rem;\r\n}", ""]);
+exports.push([module.i, ".value-render_text_JOXgM {\n    margin: 0;\n    text-align: start;\n}\n\n.value-render_list_RYt2y {\n    display: flex;\n}\n\n.value-render_object-row_1Gi1m {\n    display: flex;\n}\n\n.value-render_key_2mCzZ {\n    color: rgb(97, 97, 97);\n}\n\n.value-render_list_RYt2y .value-render_key_2mCzZ {\n    margin: 0px 0.2rem;\n}", ""]);
 
 // exports
 exports.locals = {
@@ -44197,28 +44197,9 @@ const ProjectFetcherHOC = function ProjectFetcherHOC(WrappedComponent) {
       // the project shouldn't be running while fetching the new project
       this.props.vm.clear();
       this.props.vm.quit();
-      let assetPromise;
+      let assetPromise = _storage__WEBPACK_IMPORTED_MODULE_9__["default"].load(_storage__WEBPACK_IMPORTED_MODULE_9__["default"].AssetType.Project, projectId, _storage__WEBPACK_IMPORTED_MODULE_9__["default"].DataFormat.JSON);
       // In case running in node...
-      let projectUrl = typeof URLSearchParams === 'undefined' ? null : new URLSearchParams(location.search).get('project_url');
-      if (projectUrl) {
-        if (!projectUrl.startsWith('http:') && !projectUrl.startsWith('https:')) {
-          projectUrl = "https://".concat(projectUrl);
-        }
-        assetPromise = fetch(projectUrl).then(r => {
-          if (!r.ok) {
-            throw new Error("Request returned status ".concat(r.status));
-          }
-          return r.arrayBuffer();
-        }).then(buffer => ({
-          data: buffer
-        }));
-      } else {
-        // TW: Temporary hack for project tokens
-        assetPromise = fetchProjectToken(projectId).then(token => {
-          _storage__WEBPACK_IMPORTED_MODULE_9__["default"].setProjectToken(token);
-          return _storage__WEBPACK_IMPORTED_MODULE_9__["default"].load(_storage__WEBPACK_IMPORTED_MODULE_9__["default"].AssetType.Project, projectId, _storage__WEBPACK_IMPORTED_MODULE_9__["default"].DataFormat.JSON);
-        });
-      }
+
       return assetPromise.then(projectAsset => {
         if (projectAsset) {
           this.props.onFetchedProjectData(projectAsset.data, loadingState);
@@ -46626,13 +46607,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _reducers_project_state__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../reducers/project-state */ "./src/reducers/project-state.js");
 
 const setProjectId = (dispatch, projectId) => {
-  if (true) {
-    if (projectId === '0') {
-      projectId = '';
-    }
-    location.href = "".concat("/scratch-gui/dist/").concat(projectId);
-    return;
-  }
+  if (false) {}
   dispatch(Object(_reducers_project_state__WEBPACK_IMPORTED_MODULE_0__["setProjectId"])(projectId));
 };
 const searchParamsToString = params => {
@@ -48792,6 +48767,7 @@ const createRouter = (style, callbacks) => {
   throw new Error("unknown router: ".concat(style));
 };
 const TWStateManager = function TWStateManager(WrappedComponent) {
+  var _process$env$ROUTING_;
   class StateManagerComponent extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
     constructor(props) {
       super(props);
@@ -49053,7 +49029,7 @@ const TWStateManager = function TWStateManager(WrappedComponent) {
     vm: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.instanceOf(scratch_vm__WEBPACK_IMPORTED_MODULE_4___default.a)
   };
   StateManagerComponent.defaultProps = {
-    routingStyle: "wildcard"
+    routingStyle: (_process$env$ROUTING_ = "none") !== null && _process$env$ROUTING_ !== void 0 ? _process$env$ROUTING_ : 'none'
   };
   const mapStateToProps = state => ({
     customStageSize: state.scratchGui.customStageSize,
@@ -50279,29 +50255,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _containers_dom_element_renderer_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../containers/dom-element-renderer.jsx */ "./src/containers/dom-element-renderer.jsx");
 /* harmony import */ var _lib_app_state_hoc_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../lib/app-state-hoc.jsx */ "./src/lib/app-state-hoc.jsx");
 /* harmony import */ var _lib_error_boundary_hoc_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../lib/error-boundary-hoc.jsx */ "./src/lib/error-boundary-hoc.jsx");
-/* harmony import */ var _lib_tw_project_meta_fetcher_hoc_jsx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../lib/tw-project-meta-fetcher-hoc.jsx */ "./src/lib/tw-project-meta-fetcher-hoc.jsx");
-/* harmony import */ var _lib_tw_state_manager_hoc_jsx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../lib/tw-state-manager-hoc.jsx */ "./src/lib/tw-state-manager-hoc.jsx");
-/* harmony import */ var _lib_sb_file_uploader_hoc_jsx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../lib/sb-file-uploader-hoc.jsx */ "./src/lib/sb-file-uploader-hoc.jsx");
-/* harmony import */ var _lib_tw_packager_integration_hoc_jsx__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../lib/tw-packager-integration-hoc.jsx */ "./src/lib/tw-packager-integration-hoc.jsx");
-/* harmony import */ var _addons_settings_store_singleton__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../addons/settings-store-singleton */ "./src/addons/settings-store-singleton.js");
-/* harmony import */ var _lib_tw_fix_history_api__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../lib/tw-fix-history-api */ "./src/lib/tw-fix-history-api.js");
-/* harmony import */ var _render_gui_jsx__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./render-gui.jsx */ "./src/playground/render-gui.jsx");
-/* harmony import */ var _components_menu_bar_menu_bar_jsx__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../components/menu-bar/menu-bar.jsx */ "./src/components/menu-bar/menu-bar.jsx");
-/* harmony import */ var _components_tw_project_input_project_input_jsx__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../components/tw-project-input/project-input.jsx */ "./src/components/tw-project-input/project-input.jsx");
-/* harmony import */ var _components_tw_featured_projects_featured_projects_jsx__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../components/tw-featured-projects/featured-projects.jsx */ "./src/components/tw-featured-projects/featured-projects.jsx");
-/* harmony import */ var _components_tw_description_description_jsx__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../components/tw-description/description.jsx */ "./src/components/tw-description/description.jsx");
-/* harmony import */ var _components_browser_modal_browser_modal_jsx__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../components/browser-modal/browser-modal.jsx */ "./src/components/browser-modal/browser-modal.jsx");
-/* harmony import */ var _containers_tw_cloud_variable_badge_jsx__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../containers/tw-cloud-variable-badge.jsx */ "./src/containers/tw-cloud-variable-badge.jsx");
-/* harmony import */ var _lib_tw_environment_support_prober__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../lib/tw-environment-support-prober */ "./src/lib/tw-environment-support-prober.js");
-/* harmony import */ var _addons_channels__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../addons/channels */ "./src/addons/channels.js");
-/* harmony import */ var _load_service_worker__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./load-service-worker */ "./src/playground/load-service-worker.js");
-/* harmony import */ var _addons_entry__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../addons/entry */ "./src/addons/entry.js");
-/* harmony import */ var _components_tw_invalid_embed_invalid_embed_jsx__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ../components/tw-invalid-embed/invalid-embed.jsx */ "./src/components/tw-invalid-embed/invalid-embed.jsx");
-/* harmony import */ var _lib_brand_js__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../lib/brand.js */ "./src/lib/brand.js");
-/* harmony import */ var _lib_brand_js__WEBPACK_IMPORTED_MODULE_28___default = /*#__PURE__*/__webpack_require__.n(_lib_brand_js__WEBPACK_IMPORTED_MODULE_28__);
-/* harmony import */ var _tutorial_jsx__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./tutorial.jsx */ "./src/playground/tutorial.jsx");
-/* harmony import */ var _interface_css__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./interface.css */ "./src/playground/interface.css");
-/* harmony import */ var _interface_css__WEBPACK_IMPORTED_MODULE_30___default = /*#__PURE__*/__webpack_require__.n(_interface_css__WEBPACK_IMPORTED_MODULE_30__);
+/* harmony import */ var _lib_sb_file_uploader_hoc_jsx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../lib/sb-file-uploader-hoc.jsx */ "./src/lib/sb-file-uploader-hoc.jsx");
+/* harmony import */ var _lib_tw_packager_integration_hoc_jsx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../lib/tw-packager-integration-hoc.jsx */ "./src/lib/tw-packager-integration-hoc.jsx");
+/* harmony import */ var _addons_settings_store_singleton__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../addons/settings-store-singleton */ "./src/addons/settings-store-singleton.js");
+/* harmony import */ var _lib_tw_fix_history_api__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../lib/tw-fix-history-api */ "./src/lib/tw-fix-history-api.js");
+/* harmony import */ var _render_gui_jsx__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./render-gui.jsx */ "./src/playground/render-gui.jsx");
+/* harmony import */ var _components_menu_bar_menu_bar_jsx__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../components/menu-bar/menu-bar.jsx */ "./src/components/menu-bar/menu-bar.jsx");
+/* harmony import */ var _components_tw_project_input_project_input_jsx__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../components/tw-project-input/project-input.jsx */ "./src/components/tw-project-input/project-input.jsx");
+/* harmony import */ var _components_tw_featured_projects_featured_projects_jsx__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../components/tw-featured-projects/featured-projects.jsx */ "./src/components/tw-featured-projects/featured-projects.jsx");
+/* harmony import */ var _components_tw_description_description_jsx__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../components/tw-description/description.jsx */ "./src/components/tw-description/description.jsx");
+/* harmony import */ var _components_browser_modal_browser_modal_jsx__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../components/browser-modal/browser-modal.jsx */ "./src/components/browser-modal/browser-modal.jsx");
+/* harmony import */ var _containers_tw_cloud_variable_badge_jsx__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../containers/tw-cloud-variable-badge.jsx */ "./src/containers/tw-cloud-variable-badge.jsx");
+/* harmony import */ var _lib_tw_environment_support_prober__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../lib/tw-environment-support-prober */ "./src/lib/tw-environment-support-prober.js");
+/* harmony import */ var _addons_channels__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../addons/channels */ "./src/addons/channels.js");
+/* harmony import */ var _load_service_worker__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./load-service-worker */ "./src/playground/load-service-worker.js");
+/* harmony import */ var _addons_entry__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../addons/entry */ "./src/addons/entry.js");
+/* harmony import */ var _components_tw_invalid_embed_invalid_embed_jsx__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../components/tw-invalid-embed/invalid-embed.jsx */ "./src/components/tw-invalid-embed/invalid-embed.jsx");
+/* harmony import */ var _lib_brand_js__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../lib/brand.js */ "./src/lib/brand.js");
+/* harmony import */ var _lib_brand_js__WEBPACK_IMPORTED_MODULE_26___default = /*#__PURE__*/__webpack_require__.n(_lib_brand_js__WEBPACK_IMPORTED_MODULE_26__);
+/* harmony import */ var _tutorial_jsx__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./tutorial.jsx */ "./src/playground/tutorial.jsx");
+/* harmony import */ var _interface_css__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./interface.css */ "./src/playground/interface.css");
+/* harmony import */ var _interface_css__WEBPACK_IMPORTED_MODULE_28___default = /*#__PURE__*/__webpack_require__.n(_interface_css__WEBPACK_IMPORTED_MODULE_28__);
+/* harmony import */ var _lib_project_fetcher_hoc_jsx__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ../lib/project-fetcher-hoc.jsx */ "./src/lib/project-fetcher-hoc.jsx");
+/* harmony import */ var _lib_tw_state_manager_hoc_jsx__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ../lib/tw-state-manager-hoc.jsx */ "./src/lib/tw-state-manager-hoc.jsx");
 const _excluded = ["intl", "hasCloudVariables", "description", "isFullScreen", "isLoading", "isPlayerOnly", "isRtl", "projectId"];
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 function _objectWithoutProperties(e, t) { if (null == e) return {}; var o, r, i = _objectWithoutPropertiesLoose(e, t); if (Object.getOwnPropertySymbols) { var s = Object.getOwnPropertySymbols(e); for (r = 0; r < s.length; r++) o = s[r], t.includes(o) || {}.propertyIsEnumerable.call(e, o) && (i[o] = e[o]); } return i; }
@@ -50356,7 +50332,7 @@ function _objectWithoutPropertiesLoose(r, e) { if (null == r) return {}; var t =
 const isInvalidEmbed = window.parent !== window;
 const handleClickAddonSettings = addonId => {
   // addonId might be a string of the addon to focus on, undefined, or an event (treat like undefined)
-  const path =  true ? 'addons' : undefined;
+  const path =  false ? undefined : 'addons.html';
   const url = "".concat("/scratch-gui/dist/").concat(path).concat(typeof addonId === 'string' ? "#".concat(addonId) : '');
   window.open(url);
 };
@@ -50366,34 +50342,34 @@ const messages = Object(react_intl__WEBPACK_IMPORTED_MODULE_5__["defineMessages"
     "defaultMessage": "Run Scratch projects faster"
   }
 });
-const WrappedMenuBar = Object(redux__WEBPACK_IMPORTED_MODULE_4__["compose"])(_lib_sb_file_uploader_hoc_jsx__WEBPACK_IMPORTED_MODULE_12__["default"], _lib_tw_packager_integration_hoc_jsx__WEBPACK_IMPORTED_MODULE_13__["default"])(_components_menu_bar_menu_bar_jsx__WEBPACK_IMPORTED_MODULE_17__["default"]);
-if (_addons_channels__WEBPACK_IMPORTED_MODULE_24__["default"].reloadChannel) {
-  _addons_channels__WEBPACK_IMPORTED_MODULE_24__["default"].reloadChannel.addEventListener('message', () => {
+const WrappedMenuBar = Object(redux__WEBPACK_IMPORTED_MODULE_4__["compose"])(_lib_sb_file_uploader_hoc_jsx__WEBPACK_IMPORTED_MODULE_10__["default"], _lib_tw_packager_integration_hoc_jsx__WEBPACK_IMPORTED_MODULE_11__["default"])(_components_menu_bar_menu_bar_jsx__WEBPACK_IMPORTED_MODULE_15__["default"]);
+if (_addons_channels__WEBPACK_IMPORTED_MODULE_22__["default"].reloadChannel) {
+  _addons_channels__WEBPACK_IMPORTED_MODULE_22__["default"].reloadChannel.addEventListener('message', () => {
     location.reload();
   });
 }
-if (_addons_channels__WEBPACK_IMPORTED_MODULE_24__["default"].changeChannel) {
-  _addons_channels__WEBPACK_IMPORTED_MODULE_24__["default"].changeChannel.addEventListener('message', e => {
-    _addons_settings_store_singleton__WEBPACK_IMPORTED_MODULE_14__["default"].setStoreWithVersionCheck(e.data);
+if (_addons_channels__WEBPACK_IMPORTED_MODULE_22__["default"].changeChannel) {
+  _addons_channels__WEBPACK_IMPORTED_MODULE_22__["default"].changeChannel.addEventListener('message', e => {
+    _addons_settings_store_singleton__WEBPACK_IMPORTED_MODULE_12__["default"].setStoreWithVersionCheck(e.data);
   });
 }
-Object(_addons_entry__WEBPACK_IMPORTED_MODULE_26__["default"])();
+Object(_addons_entry__WEBPACK_IMPORTED_MODULE_24__["default"])();
 const Footer = () => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("footer", {
-  className: _interface_css__WEBPACK_IMPORTED_MODULE_30___default.a.footer
+  className: _interface_css__WEBPACK_IMPORTED_MODULE_28___default.a.footer
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-  className: _interface_css__WEBPACK_IMPORTED_MODULE_30___default.a.footerContent
+  className: _interface_css__WEBPACK_IMPORTED_MODULE_28___default.a.footerContent
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-  className: _interface_css__WEBPACK_IMPORTED_MODULE_30___default.a.footerText
+  className: _interface_css__WEBPACK_IMPORTED_MODULE_28___default.a.footerText
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_intl__WEBPACK_IMPORTED_MODULE_5__["FormattedMessage"]
 // eslint-disable-next-line max-len
 , {
   defaultMessage: "{APP_NAME} is not affiliated with Scratch, the Scratch Team, or the Scratch Foundation.",
   id: "tw.footer.disclaimer",
   values: {
-    APP_NAME: _lib_brand_js__WEBPACK_IMPORTED_MODULE_28__["APP_NAME"]
+    APP_NAME: _lib_brand_js__WEBPACK_IMPORTED_MODULE_26__["APP_NAME"]
   }
 })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-  className: _interface_css__WEBPACK_IMPORTED_MODULE_30___default.a.footerText
+  className: _interface_css__WEBPACK_IMPORTED_MODULE_28___default.a.footerText
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_intl__WEBPACK_IMPORTED_MODULE_5__["FormattedMessage"], {
   defaultMessage: "Scratch is a project of the Scratch Foundation. It is available for free at {scratchDotOrg}.",
   id: "tw.footer.scratchDisclaimer",
@@ -50405,9 +50381,9 @@ const Footer = () => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.c
     }, 'https://scratch.org/')
   }
 })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-  className: _interface_css__WEBPACK_IMPORTED_MODULE_30___default.a.footerColumns
+  className: _interface_css__WEBPACK_IMPORTED_MODULE_28___default.a.footerColumns
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-  className: _interface_css__WEBPACK_IMPORTED_MODULE_30___default.a.footerSection
+  className: _interface_css__WEBPACK_IMPORTED_MODULE_28___default.a.footerSection
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
   href: "credits.html"
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_intl__WEBPACK_IMPORTED_MODULE_5__["FormattedMessage"], {
@@ -50419,7 +50395,7 @@ const Footer = () => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.c
   defaultMessage: "Donate",
   id: "tw.footer.donate"
 }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-  className: _interface_css__WEBPACK_IMPORTED_MODULE_30___default.a.footerSection
+  className: _interface_css__WEBPACK_IMPORTED_MODULE_28___default.a.footerSection
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
   href: "https://desktop.turbowarp.org/"
 }, 'TurboWarp Desktop'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
@@ -50440,7 +50416,7 @@ const Footer = () => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.c
   defaultMessage: "Documentation",
   id: "tw.footer.documentation"
 }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-  className: _interface_css__WEBPACK_IMPORTED_MODULE_30___default.a.footerSection
+  className: _interface_css__WEBPACK_IMPORTED_MODULE_28___default.a.footerSection
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
   href: "https://scratch.mit.edu/users/GarboMuffin/#comments"
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_intl__WEBPACK_IMPORTED_MODULE_5__["FormattedMessage"], {
@@ -50464,19 +50440,19 @@ class Interface extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Component {
   }
   componentDidUpdate(prevProps) {
     if (prevProps.isLoading && !this.props.isLoading) {
-      Object(_load_service_worker__WEBPACK_IMPORTED_MODULE_25__["loadServiceWorker"])();
+      Object(_load_service_worker__WEBPACK_IMPORTED_MODULE_23__["loadServiceWorker"])();
     }
   }
   handleUpdateProjectTitle(title, isDefault) {
     if (isDefault || !title) {
-      document.title = "".concat(_lib_brand_js__WEBPACK_IMPORTED_MODULE_28__["APP_NAME"], " - ").concat(this.props.intl.formatMessage(messages.defaultTitle));
+      document.title = "".concat(_lib_brand_js__WEBPACK_IMPORTED_MODULE_26__["APP_NAME"], " - ").concat(this.props.intl.formatMessage(messages.defaultTitle));
     } else {
-      document.title = "".concat(title, " - ").concat(_lib_brand_js__WEBPACK_IMPORTED_MODULE_28__["APP_NAME"]);
+      document.title = "".concat(title, " - ").concat(_lib_brand_js__WEBPACK_IMPORTED_MODULE_26__["APP_NAME"]);
     }
   }
   render() {
     if (isInvalidEmbed) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_components_tw_invalid_embed_invalid_embed_jsx__WEBPACK_IMPORTED_MODULE_27__["default"], null);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_components_tw_invalid_embed_invalid_embed_jsx__WEBPACK_IMPORTED_MODULE_25__["default"], null);
     }
     const _this$props = this.props,
       {
@@ -50495,13 +50471,13 @@ class Interface extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Component {
     const isHomepage = isPlayerOnly && !isFullScreen;
     const isEditor = !isPlayerOnly;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-      className: classnames__WEBPACK_IMPORTED_MODULE_0___default()(_interface_css__WEBPACK_IMPORTED_MODULE_30___default.a.container, {
-        [_interface_css__WEBPACK_IMPORTED_MODULE_30___default.a.playerOnly]: isHomepage,
-        [_interface_css__WEBPACK_IMPORTED_MODULE_30___default.a.editor]: isEditor
+      className: classnames__WEBPACK_IMPORTED_MODULE_0___default()(_interface_css__WEBPACK_IMPORTED_MODULE_28___default.a.container, {
+        [_interface_css__WEBPACK_IMPORTED_MODULE_28___default.a.playerOnly]: isHomepage,
+        [_interface_css__WEBPACK_IMPORTED_MODULE_28___default.a.editor]: isEditor
       }),
       dir: isRtl ? 'rtl' : 'ltr'
     }, isHomepage ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-      className: _interface_css__WEBPACK_IMPORTED_MODULE_30___default.a.menu
+      className: _interface_css__WEBPACK_IMPORTED_MODULE_28___default.a.menu
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(WrappedMenuBar, {
       canChangeLanguage: true,
       canManageFiles: true,
@@ -50509,21 +50485,19 @@ class Interface extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Component {
       enableSeeInside: true,
       onClickAddonSettings: handleClickAddonSettings
     })) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-      className: _interface_css__WEBPACK_IMPORTED_MODULE_30___default.a.center,
+      className: _interface_css__WEBPACK_IMPORTED_MODULE_28___default.a.center,
       style: isPlayerOnly ? {
         // + 2 accounts for 1px border on each side of the stage
         width: "".concat(Math.max(480, props.customStageSize.width) + 2, "px")
       } : null
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_render_gui_jsx__WEBPACK_IMPORTED_MODULE_16__["default"], _extends({
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_render_gui_jsx__WEBPACK_IMPORTED_MODULE_14__["default"], _extends({
       onClickAddonSettings: handleClickAddonSettings,
       onUpdateProjectTitle: this.handleUpdateProjectTitle,
       backpackVisible: true,
       backpackHost: "_local_"
-    }, props, {
-      projectId: 0
-    })), isHomepage && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h2", null, "Nightscrach Editor 0.1 \u877E\u8788\u6C60\u7279\u6709\u7F16\u8F91\u5668Beta\u7248\u672C"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
+    }, props)), isHomepage && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h2", null, "Nightscrach Editor 0.1 \u877E\u8788\u6C60\u7279\u6709\u7F16\u8F91\u5668Beta\u7248\u672C"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
       href: "https://github.com/Nightre/scratch-gui"
-    }, "https://github.com/Nightre/scratch-gui"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("p", null, "\u8BE5\u9875\u9762\u4EC5\u4E3A\u9884\u89C8\u7248\uFF0C\u5F53\u7F16\u8F91\u5668\u53D8\u5F97\u6210\u719F\uFF0C\u5C06\u4F1A\u4EE3\u66FF\u877E\u8788\u6C60\u9ED8\u8BA4\u7F16\u8F91\u5668"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_tutorial_jsx__WEBPACK_IMPORTED_MODULE_29__["default"], null))));
+    }, "https://github.com/Nightre/scratch-gui"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("p", null, "\u8BE5\u9875\u9762\u4EC5\u4E3A\u9884\u89C8\u7248\uFF0C\u5F53\u7F16\u8F91\u5668\u53D8\u5F97\u6210\u719F\uFF0C\u5C06\u4F1A\u4EE3\u66FF\u877E\u8788\u6C60\u9ED8\u8BA4\u7F16\u8F91\u5668"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_tutorial_jsx__WEBPACK_IMPORTED_MODULE_27__["default"], null))));
   }
 }
 Interface.propTypes = {
@@ -50555,7 +50529,7 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = () => ({});
 const ConnectedInterface = Object(react_intl__WEBPACK_IMPORTED_MODULE_5__["injectIntl"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, mapDispatchToProps)(Interface));
-const WrappedInterface = Object(redux__WEBPACK_IMPORTED_MODULE_4__["compose"])(_lib_app_state_hoc_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], Object(_lib_error_boundary_hoc_jsx__WEBPACK_IMPORTED_MODULE_9__["default"])('TW Interface'), _lib_tw_project_meta_fetcher_hoc_jsx__WEBPACK_IMPORTED_MODULE_10__["default"], _lib_tw_packager_integration_hoc_jsx__WEBPACK_IMPORTED_MODULE_13__["default"])(ConnectedInterface);
+const WrappedInterface = Object(redux__WEBPACK_IMPORTED_MODULE_4__["compose"])(_lib_app_state_hoc_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], Object(_lib_error_boundary_hoc_jsx__WEBPACK_IMPORTED_MODULE_9__["default"])('TW Interface'), _lib_project_fetcher_hoc_jsx__WEBPACK_IMPORTED_MODULE_29__["default"], _lib_tw_state_manager_hoc_jsx__WEBPACK_IMPORTED_MODULE_30__["default"], _lib_tw_packager_integration_hoc_jsx__WEBPACK_IMPORTED_MODULE_11__["default"])(ConnectedInterface);
 /* harmony default export */ __webpack_exports__["default"] = (WrappedInterface);
 
 /***/ }),
@@ -53178,10 +53152,13 @@ const projectError = error => ({
   type: START_ERROR,
   error: error
 });
-const setProjectId = id => ({
-  type: SET_PROJECT_ID,
-  projectId: id
-});
+const setProjectId = id => {
+  debugger;
+  return {
+    type: SET_PROJECT_ID,
+    projectId: id
+  };
+};
 const requestNewProject = needSave => {
   if (needSave) return {
     type: START_UPDATING_BEFORE_CREATING_NEW

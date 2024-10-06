@@ -105,31 +105,9 @@ const ProjectFetcherHOC = function (WrappedComponent) {
             this.props.vm.clear();
             this.props.vm.quit();
 
-            let assetPromise;
+            let assetPromise = storage.load(storage.AssetType.Project, projectId, storage.DataFormat.JSON);
             // In case running in node...
-            let projectUrl = typeof URLSearchParams === 'undefined' ?
-                null :
-                new URLSearchParams(location.search).get('project_url');
-            if (projectUrl) {
-                if (!projectUrl.startsWith('http:') && !projectUrl.startsWith('https:')) {
-                    projectUrl = `https://${projectUrl}`;
-                }
-                assetPromise = fetch(projectUrl)
-                    .then(r => {
-                        if (!r.ok) {
-                            throw new Error(`Request returned status ${r.status}`);
-                        }
-                        return r.arrayBuffer();
-                    })
-                    .then(buffer => ({data: buffer}));
-            } else {
-                // TW: Temporary hack for project tokens
-                assetPromise = fetchProjectToken(projectId)
-                    .then(token => {
-                        storage.setProjectToken(token);
-                        return storage.load(storage.AssetType.Project, projectId, storage.DataFormat.JSON);
-                    });
-            }
+            
 
             return assetPromise
                 .then(projectAsset => {

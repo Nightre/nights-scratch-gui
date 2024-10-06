@@ -1,5 +1,6 @@
 {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	"folders": [
 		{
 			"path": "."
@@ -17,10 +18,15 @@
 		"workbench.editor.wrapTabs": true
 	}
 =======
+=======
+>>>>>>> Stashed changes
     "folders": [
         {
             "path": "."
         }
     ]
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 }

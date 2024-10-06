@@ -259,13 +259,8 @@ class Interface extends React.Component {
                         onUpdateProjectTitle={this.handleUpdateProjectTitle}
                         backpackVisible
                         backpackHost="_local_"
+                        
                         {...props}
-                        projectToken="asdsd"
-                        projectId ={80}
-
-                        basePath={"/scratch-gui/dist/"}
-                        projectHost={"https://asdasd.com//get_project"}
-                        assetHost={"https://asdasd.com/project_assets"}
                     />
                     {isHomepage && 
                         <>
@@ -319,8 +314,9 @@ const ConnectedInterface = injectIntl(connect(
 
 const WrappedInterface = compose(
     AppStateHOC,
-    TWStateManagerHOC,
     ErrorBoundaryHOC('TW Interface'),
+    ProjectFetcherHOC,
+    TWStateManagerHOC,
     TWPackagerIntegrationHOC
 )(ConnectedInterface);
 

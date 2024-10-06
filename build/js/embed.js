@@ -304,7 +304,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "/* overridden by src/lib/themes/guiHelpers.js */\n\n.add-component-btn_select_2taP_ {\r\n    width: 100%;\r\n    height: 2rem;\r\n    border-radius: calc(0.5rem / 2);\r\n    text-align: center;\r\n    border: none;\r\n    box-shadow: 0 0 0 1px var(--ui-black-transparent);\r\n    color: var(--menu-bar-foreground);\r\n    background-color:var(--looks-secondary);\r\n}\n\n.add-component-btn_select_2taP_ option {\r\n    background: var(--ui-secondary);\r\n    color: var(--text-primary);\r\n}", ""]);
+exports.push([module.i, "/* overridden by src/lib/themes/guiHelpers.js */\n\n.add-component-btn_select_2taP_ {\n    width: 100%;\n    height: 2rem;\n    border-radius: calc(0.5rem / 2);\n    text-align: center;\n    border: none;\n    box-shadow: 0 0 0 1px var(--ui-black-transparent);\n    color: var(--menu-bar-foreground);\n    background-color:var(--looks-secondary);\n}\n\n.add-component-btn_select_2taP_ option {\n    background: var(--ui-secondary);\n    color: var(--text-primary);\n}", ""]);
 
 // exports
 exports.locals = {
@@ -773,7 +773,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "/* overridden by src/lib/themes/guiHelpers.js */\n\n.component-attribute_card_11Z1w {\r\n    width: 100%;\r\n    min-height: 2rem;\r\n    border-radius: 0.25rem;\r\n    padding: 0.3rem;\r\n\r\n    background: var(--ui-white);\r\n    color: var(--text-primary);\r\n\r\n    border: 1px solid var(--ui-black-transparent);\r\n}\n\n.component-attribute_close_-2zU0 {\r\n    float: right;\r\n    width: 1.5rem;\r\n    height: 1.5rem;\r\n    font-size: 1rem;\r\n    margin-left: 0.5rem;\r\n\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n\r\n    padding: 0;\r\n    border: none;\r\n    background-color: #f0f0f0;\r\n\r\n    border-radius: 0.5rem;\r\n}\n\n.component-attribute_close_-2zU0 img {\r\n    height: 0.8rem;\r\n    width: 0.8rem;\r\n}\n\n.component-attribute_card_11Z1w p {\r\n    margin: 0;\r\n}\n\n.component-attribute_title_3yvud {\r\n    font-size: 1rem;\r\n}\n\n.component-attribute_col_1Q56R {\r\n    display: flex;\r\n    flex-direction: column;\r\n    gap: 0.5rem;\r\n    margin-top: 0.5rem;\r\n}", ""]);
+exports.push([module.i, "/* overridden by src/lib/themes/guiHelpers.js */\n\n.component-attribute_card_11Z1w {\n    width: 100%;\n    min-height: 2rem;\n    border-radius: 0.25rem;\n    padding: 0.3rem;\n\n    background: var(--ui-white);\n    color: var(--text-primary);\n\n    border: 1px solid var(--ui-black-transparent);\n}\n\n.component-attribute_close_-2zU0 {\n    float: right;\n    width: 1.5rem;\n    height: 1.5rem;\n    font-size: 1rem;\n    margin-left: 0.5rem;\n\n    display: flex;\n    align-items: center;\n    justify-content: center;\n\n    padding: 0;\n    border: none;\n    background-color: #f0f0f0;\n\n    border-radius: 0.5rem;\n}\n\n.component-attribute_close_-2zU0 img {\n    height: 0.8rem;\n    width: 0.8rem;\n}\n\n.component-attribute_card_11Z1w p {\n    margin: 0;\n}\n\n.component-attribute_title_3yvud {\n    font-size: 1rem;\n}\n\n.component-attribute_col_1Q56R {\n    display: flex;\n    flex-direction: column;\n    gap: 0.5rem;\n    margin-top: 0.5rem;\n}", ""]);
 
 // exports
 exports.locals = {
@@ -3258,7 +3258,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".value-render_text_JOXgM {\r\n    margin: 0;\r\n    text-align: start;\r\n}\r\n\r\n.value-render_list_RYt2y {\r\n    display: flex;\r\n}\r\n\r\n.value-render_object-row_1Gi1m {\r\n    display: flex;\r\n}\r\n\r\n.value-render_key_2mCzZ {\r\n    color: rgb(97, 97, 97);\r\n}\r\n\r\n.value-render_list_RYt2y .value-render_key_2mCzZ {\r\n    margin: 0px 0.2rem;\r\n}", ""]);
+exports.push([module.i, ".value-render_text_JOXgM {\n    margin: 0;\n    text-align: start;\n}\n\n.value-render_list_RYt2y {\n    display: flex;\n}\n\n.value-render_object-row_1Gi1m {\n    display: flex;\n}\n\n.value-render_key_2mCzZ {\n    color: rgb(97, 97, 97);\n}\n\n.value-render_list_RYt2y .value-render_key_2mCzZ {\n    margin: 0px 0.2rem;\n}", ""]);
 
 // exports
 exports.locals = {
@@ -41824,28 +41824,9 @@ const ProjectFetcherHOC = function ProjectFetcherHOC(WrappedComponent) {
       // the project shouldn't be running while fetching the new project
       this.props.vm.clear();
       this.props.vm.quit();
-      let assetPromise;
+      let assetPromise = _storage__WEBPACK_IMPORTED_MODULE_9__["default"].load(_storage__WEBPACK_IMPORTED_MODULE_9__["default"].AssetType.Project, projectId, _storage__WEBPACK_IMPORTED_MODULE_9__["default"].DataFormat.JSON);
       // In case running in node...
-      let projectUrl = typeof URLSearchParams === 'undefined' ? null : new URLSearchParams(location.search).get('project_url');
-      if (projectUrl) {
-        if (!projectUrl.startsWith('http:') && !projectUrl.startsWith('https:')) {
-          projectUrl = "https://".concat(projectUrl);
-        }
-        assetPromise = fetch(projectUrl).then(r => {
-          if (!r.ok) {
-            throw new Error("Request returned status ".concat(r.status));
-          }
-          return r.arrayBuffer();
-        }).then(buffer => ({
-          data: buffer
-        }));
-      } else {
-        // TW: Temporary hack for project tokens
-        assetPromise = fetchProjectToken(projectId).then(token => {
-          _storage__WEBPACK_IMPORTED_MODULE_9__["default"].setProjectToken(token);
-          return _storage__WEBPACK_IMPORTED_MODULE_9__["default"].load(_storage__WEBPACK_IMPORTED_MODULE_9__["default"].AssetType.Project, projectId, _storage__WEBPACK_IMPORTED_MODULE_9__["default"].DataFormat.JSON);
-        });
-      }
+
       return assetPromise.then(projectAsset => {
         if (projectAsset) {
           this.props.onFetchedProjectData(projectAsset.data, loadingState);
@@ -44309,13 +44290,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _reducers_project_state__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../reducers/project-state */ "./src/reducers/project-state.js");
 
 const setProjectId = (dispatch, projectId) => {
-  if (true) {
-    if (projectId === '0') {
-      projectId = '';
-    }
-    location.href = "".concat("/scratch-gui/dist/").concat(projectId);
-    return;
-  }
+  if (false) {}
   dispatch(Object(_reducers_project_state__WEBPACK_IMPORTED_MODULE_0__["setProjectId"])(projectId));
 };
 const searchParamsToString = params => {
@@ -46361,6 +46336,7 @@ const createRouter = (style, callbacks) => {
   throw new Error("unknown router: ".concat(style));
 };
 const TWStateManager = function TWStateManager(WrappedComponent) {
+  var _process$env$ROUTING_;
   class StateManagerComponent extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
     constructor(props) {
       super(props);
@@ -46622,7 +46598,7 @@ const TWStateManager = function TWStateManager(WrappedComponent) {
     vm: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.instanceOf(scratch_vm__WEBPACK_IMPORTED_MODULE_4___default.a)
   };
   StateManagerComponent.defaultProps = {
-    routingStyle: "wildcard"
+    routingStyle: (_process$env$ROUTING_ = "none") !== null && _process$env$ROUTING_ !== void 0 ? _process$env$ROUTING_ : 'none'
   };
   const mapStateToProps = state => ({
     customStageSize: state.scratchGui.customStageSize,
@@ -50285,10 +50261,13 @@ const projectError = error => ({
   type: START_ERROR,
   error: error
 });
-const setProjectId = id => ({
-  type: SET_PROJECT_ID,
-  projectId: id
-});
+const setProjectId = id => {
+  debugger;
+  return {
+    type: SET_PROJECT_ID,
+    projectId: id
+  };
+};
 const requestNewProject = needSave => {
   if (needSave) return {
     type: START_UPDATING_BEFORE_CREATING_NEW
