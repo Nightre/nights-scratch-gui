@@ -44,6 +44,7 @@ import { APP_NAME } from '../lib/brand.js';
 import Tutorial from "./tutorial.jsx"
 import styles from './interface.css';
 import ProjectFetcherHOC from "../lib/project-fetcher-hoc.jsx"
+import TWStateManagerHOC from "../lib/tw-state-manager-hoc.jsx"
 const isInvalidEmbed = window.parent !== window;
 
 const handleClickAddonSettings = addonId => {
@@ -260,7 +261,7 @@ class Interface extends React.Component {
                         backpackHost="_local_"
                         {...props}
                         projectToken="asdsd"
-                        projectId={80}
+                        projectId ={80}
 
                         basePath={"/scratch-gui/dist/"}
                         projectHost={"https://asdasd.com//get_project"}
@@ -318,7 +319,7 @@ const ConnectedInterface = injectIntl(connect(
 
 const WrappedInterface = compose(
     AppStateHOC,
-    ProjectFetcherHOC,
+    TWStateManagerHOC,
     ErrorBoundaryHOC('TW Interface'),
     TWPackagerIntegrationHOC
 )(ConnectedInterface);

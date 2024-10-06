@@ -1,4 +1,5 @@
 {
+<<<<<<< Updated upstream
 	"folders": [
 		{
 			"path": "."
@@ -15,4 +16,11 @@
 		"tailwindCSS.emmetCompletions": true,
 		"workbench.editor.wrapTabs": true
 	}
+=======
+    "folders": [
+        {
+            "path": "."
+        }
+    ]
+>>>>>>> Stashed changes
 }
